@@ -2,7 +2,7 @@
 def frontera(grafo, n, clique):
 	res = 0
 	for i in range(len(clique)):
-		res = len(nodosAdyacentes(grafo, n, clique[i])) - (len(clique) - 1)
+		res += len(nodosAdyacentes(grafo, n, clique[i])) - (len(clique) - 1)
 
 	return res
 
