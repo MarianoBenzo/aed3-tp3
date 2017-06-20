@@ -124,5 +124,112 @@ public class funcionesAux
         return Collections.max(fronteras);
     }  
 
+
+/*
+
+def parametrosRandom(n, m, k):
+
+    G = []
+    for i in range(n):
+        G.append([])
+        for j in range(n):
+            G[i].append(None)
+        
+    #Rutas = Todas las rutas posibles enumeradas de 0 a n*n
+    rutas = range(n*n)
+    #Elimino rutas que tengas de origen y destino la misma ciudad
+    for i in range(n):
+        rutas.remove(n*i+i)
+
+
+    for i in range(m):
+
+        infoRuta = []
+
+        #Quiero que las rutas premium tiendan a ser mas cortas
+        if random.choice([True, False]):
+            distancia = int(abs(random.normalvariate(50, 10)))
+            infoRuta = [True, distancia]
+        else:
+            distancia = int(abs(random.normalvariate(70, 10)))
+            infoRuta = [False, distancia]
+
+        ruta = random.choice(rutas)
+
+        #Al ser rutas bidireccionales la matriz se genera de forma geometrica
+        rutas.remove(ruta)
+        rutas.remove(n*(ruta%n) + ruta/n)
+
+        G[ruta/n][ruta%n] = infoRuta
+        G[ruta%n][ruta/n] = infoRuta
+
+    #parametros = [Ciudades, rutas, origen, destino, rutas premium, grafo]
+    parametros = [n, m, 0, n-1, k, G]
+    
+    return parametros
+
+*/
+
+    //Genera Grafo Aleatorio
+    public static boolean[][] grafoRandom(int n, int m)
+    {   
+
+        boolean[][] grafo = new boolean[n][n];
+
+        for (boolean[] fila : grafo)
+        {
+            Arrays.fill(fila, false);
+        }
+
+
+        List<Integer> rutas = new ArrayList<Integer>();
+        
+        for (int i=0;i<n*n;i++)
+        {
+            if(i%n > i/n)
+            {
+                rutas.add(i);
+            }
+        }
+
+
+        for(int i=0;i<m;i++)
+        {
+            int ruta = (int) (Math.random() * rutas.size());
+
+            int x = rutas.get(ruta)%n;
+            int y = rutas.get(ruta)/n;
+            grafo[x][y] = true;
+            grafo[y][x] = true;
+
+            rutas.remove(ruta);
+        }
+
+        return grafo;
+    } 
+
+
+
+    public static void printGrafo(boolean[][] grafo)
+    {   
+        int n = grafo[0].length;
+        for(int i=0;i<n;i++)
+        {
+            System.out.println(Arrays.toString(grafo[i]));
+        }
+    }
+
+
+    public static void main(String[] args)
+    {
+        int n = 5;
+        //int m = n*(n-1)/2;
+        int m = 5;
+
+        boolean[][] grafo = grafoRandom(n, m);
+
+        printGrafo(grafo);
+
+    }
 }
 	

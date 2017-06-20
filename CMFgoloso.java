@@ -26,16 +26,14 @@ public class CMFgoloso
 
     public static void main(String[] args)
     {
-    	boolean[][] grafo = {
-        {false, true, false, true},
-        {true, false, true, true},
-        {false, true, false, false},
-        {true, true, false, false}
-        };
+        int n = 150;
+        
+        int m = n*(n-1)/4;
 
-        int n = 4;
+        boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
         System.out.println("CMF Goloso: "+CMFgoloso(grafo, n));
+        System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
 
 }
