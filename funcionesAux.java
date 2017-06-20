@@ -125,50 +125,55 @@ public class funcionesAux
     }  
 
 
+
+
 /*
 
-def parametrosRandom(n, m, k):
+    public static List<Integer> cliqueMaxFronteraDeNodo(boolean[][] grafo, int n, int nodo)
+    {
+        List<Integer> adyacentes = nodosAdyacentes(grafo, n, nodo);
 
-    G = []
-    for i in range(n):
-        G.append([])
-        for j in range(n):
-            G[i].append(None)
-        
-    #Rutas = Todas las rutas posibles enumeradas de 0 a n*n
-    rutas = range(n*n)
-    #Elimino rutas que tengas de origen y destino la misma ciudad
-    for i in range(n):
-        rutas.remove(n*i+i)
+        List<List<Integer>> cliques = cliquesDeNodo(grafo, n, nodo);
 
+        int fronteraMax = 0;
 
-    for i in range(m):
+        List<Integer> cliqueMax = null;
 
-        infoRuta = []
+        for(int i=0;i<cliques.size();i++)
+        {
+            if(frontera(grafo, n, cliques.get(i)) > fronteraMax)
+            {
+                cliqueMax = cliques.get(i);
+                fronteraMax = frontera(grafo, n, cliques.get(i));
+            }
+        }
 
-        #Quiero que las rutas premium tiendan a ser mas cortas
-        if random.choice([True, False]):
-            distancia = int(abs(random.normalvariate(50, 10)))
-            infoRuta = [True, distancia]
-        else:
-            distancia = int(abs(random.normalvariate(70, 10)))
-            infoRuta = [False, distancia]
-
-        ruta = random.choice(rutas)
-
-        #Al ser rutas bidireccionales la matriz se genera de forma geometrica
-        rutas.remove(ruta)
-        rutas.remove(n*(ruta%n) + ruta/n)
-
-        G[ruta/n][ruta%n] = infoRuta
-        G[ruta%n][ruta/n] = infoRuta
-
-    #parametros = [Ciudades, rutas, origen, destino, rutas premium, grafo]
-    parametros = [n, m, 0, n-1, k, G]
-    
-    return parametros
+        return cliqueMax;
+    }  
 
 */
+
+    public static int nodoMayorGrado(boolean[][] grafo, int n)
+    {   
+        int mayorGrado = 0;
+        Integer nodoMayorGrado = null;
+
+        for(int nodo=0;nodo<n;nodo++)
+        {
+            int gradoNodo = funcionesAux.nodosAdyacentes(grafo, n, nodo).size();
+
+            if( gradoNodo > mayorGrado)
+            {
+                mayorGrado = gradoNodo;
+                nodoMayorGrado = nodo;
+            }
+        }    
+
+        return nodoMayorGrado;
+    }
+
+
+
 
     //Genera Grafo Aleatorio
     public static boolean[][] grafoRandom(int n, int m)
@@ -213,10 +218,13 @@ def parametrosRandom(n, m, k):
     public static void printGrafo(boolean[][] grafo)
     {   
         int n = grafo[0].length;
+
+        System.out.println("Grafo: ");
         for(int i=0;i<n;i++)
         {
             System.out.println(Arrays.toString(grafo[i]));
         }
+        System.out.println(" ");
     }
 
 
@@ -229,6 +237,9 @@ def parametrosRandom(n, m, k):
         boolean[][] grafo = grafoRandom(n, m);
 
         printGrafo(grafo);
+
+
+        System.out.println("Nodo Mayor Grado: "+nodoMayorGrado(grafo, n));
 
     }
 }

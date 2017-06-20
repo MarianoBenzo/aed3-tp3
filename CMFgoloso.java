@@ -6,19 +6,7 @@ public class CMFgoloso
     public static int CMFgoloso(boolean[][] grafo, int n)
     {	
 
-        int mayorGrado = 0;
-        Integer nodoMayorGrado = null;
-
-        for(int nodo=0;nodo<n;nodo++)
-        {
-            int gradoNodo = funcionesAux.nodosAdyacentes(grafo, n, nodo).size();
-
-            if( gradoNodo > mayorGrado)
-            {
-                mayorGrado = gradoNodo;
-                nodoMayorGrado = nodo;
-            }
-        }    
+        int nodoMayorGrado = funcionesAux.nodoMayorGrado(grafo, n);
 
         return funcionesAux.CMFnodo(grafo, n, nodoMayorGrado);
     }
@@ -26,7 +14,7 @@ public class CMFgoloso
 
     public static void main(String[] args)
     {
-        int n = 150;
+        int n = 50;
         
         int m = n*(n-1)/4;
 
