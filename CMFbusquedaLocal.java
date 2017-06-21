@@ -7,13 +7,13 @@ public class CMFbusquedaLocal
     {	
 
         int nodo = funcionesAux.nodoMayorGrado(grafo, n);
-        int cliqueMaxFrontera = funcionesAux.CMFnodo(grafo, n, nodo);
+        int maxFrontera = funcionesAux.CMFnodo(grafo, n, nodo);
         List<Integer> vecinos = funcionesAux.nodosAdyacentes(grafo, n, nodo);
 
         boolean fin = false;
 
         int nodoAux = 0;
-        int cliqueMaxFronteraAux = 0;
+        int maxFronteraAux = 0;
  
         while(!fin)
         {
@@ -21,10 +21,10 @@ public class CMFbusquedaLocal
 
             for(int i=0;i<vecinos.size();i++)
             {
-                if(funcionesAux.CMFnodo(grafo, n, vecinos.get(i)) > cliqueMaxFrontera)
+                if(funcionesAux.CMFnodo(grafo, n, vecinos.get(i)) > maxFrontera)
                 {
                     nodoAux = vecinos.get(i);
-                    cliqueMaxFronteraAux = funcionesAux.CMFnodo(grafo, n, vecinos.get(i));
+                    maxFronteraAux = funcionesAux.CMFnodo(grafo, n, vecinos.get(i));
                     fin = false;
                 }
             }
@@ -32,12 +32,13 @@ public class CMFbusquedaLocal
             if(!fin)
             {
             nodo = nodoAux;
-            cliqueMaxFrontera = cliqueMaxFronteraAux;
+            maxFrontera = maxFronteraAux;
+            vecinos = funcionesAux.nodosAdyacentes(grafo, n, nodo);
             }
         }
 
 
-        return cliqueMaxFrontera;
+        return maxFrontera;
     }
 
 

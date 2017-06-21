@@ -127,7 +127,7 @@ public class funcionesAux
 
 
 
-/*
+
 
     public static List<Integer> cliqueMaxFronteraDeNodo(boolean[][] grafo, int n, int nodo)
     {
@@ -151,7 +151,7 @@ public class funcionesAux
         return cliqueMax;
     }  
 
-*/
+
 
     public static int nodoMayorGrado(boolean[][] grafo, int n)
     {   
