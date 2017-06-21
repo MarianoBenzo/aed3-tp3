@@ -14,8 +14,23 @@ public class funcionesAux
 
         return res;
     }
-    
 
+/*
+    public static List<Integer> nodosFrontera(boolean[][] grafo, int n, List<Integer> clique)
+    {
+        List<Integer> nodosFrontera = new ArrayList<Integer>();
+
+        for(int i=0;i<clique.size();i++)
+        {
+            nodosFrontera.addAll(nodosAdyacentes(grafo, n, clique.get(i)));
+        }
+
+        nodosFrontera.removeAll(clique);
+
+        return nodosFrontera;
+    }
+
+*/
     //nodosAdyacentes = Devuelve los nodos adyacentes al nodo ingresado, en forma de array.
     public static List<Integer> nodosAdyacentes(boolean[][] grafo, int n, int nodo)
     {
@@ -114,21 +129,23 @@ public class funcionesAux
 
         List<List<Integer>> cliques = cliquesDeNodo(grafo, n, nodo);
 
-        List<Integer> fronteras = new ArrayList<Integer>();
+        int fronteraMax = 0;
 
         for(int i=0;i<cliques.size();i++)
         {
-            fronteras.add(frontera(grafo, n, cliques.get(i)));
+            int fronteraAux = frontera(grafo, n, cliques.get(i));
+            if(fronteraAux > fronteraMax)
+            {
+                fronteraMax = fronteraAux;
+            }
         }
 
-        return Collections.max(fronteras);
+        return fronteraMax;
     }  
 
 
 
-
-
-
+/*
     public static List<Integer> cliqueMaxFronteraDeNodo(boolean[][] grafo, int n, int nodo)
     {
         List<Integer> adyacentes = nodosAdyacentes(grafo, n, nodo);
@@ -150,7 +167,7 @@ public class funcionesAux
 
         return cliqueMax;
     }  
-
+*/
 
 
     public static int nodoMayorGrado(boolean[][] grafo, int n)
@@ -199,8 +216,14 @@ public class funcionesAux
 
 
         for(int i=0;i<m;i++)
-        {
-            int ruta = (int) (Math.random() * rutas.size());
+        {   
+            long seed = 1L;
+            Random random = new Random(seed);
+
+            int ruta = random.nextInt();
+            ruta = Math.abs(ruta % rutas.size());
+
+            //int ruta = (int) (Math.random() * rutas.size());
 
             int x = rutas.get(ruta)%n;
             int y = rutas.get(ruta)/n;
@@ -236,10 +259,7 @@ public class funcionesAux
 
         boolean[][] grafo = grafoRandom(n, m);
 
-        printGrafo(grafo);
-
-
-        System.out.println("Nodo Mayor Grado: "+nodoMayorGrado(grafo, n));
+        printGrafo(grafo);      
 
     }
 }

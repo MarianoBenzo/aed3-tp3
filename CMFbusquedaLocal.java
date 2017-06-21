@@ -14,17 +14,22 @@ public class CMFbusquedaLocal
 
         int nodoAux = 0;
         int maxFronteraAux = 0;
+        List<Integer> vecinosAux = new ArrayList<Integer>();
  
         while(!fin)
         {
             fin = true;
 
             for(int i=0;i<vecinos.size();i++)
-            {
-                if(funcionesAux.CMFnodo(grafo, n, vecinos.get(i)) > maxFrontera)
+            {   
+                int CMFnodo = funcionesAux.CMFnodo(grafo, n, vecinos.get(i));
+                if(CMFnodo > maxFrontera)
                 {
                     nodoAux = vecinos.get(i);
-                    maxFronteraAux = funcionesAux.CMFnodo(grafo, n, vecinos.get(i));
+                    maxFronteraAux = CMFnodo;
+                    //vecinosAux = funcionesAux.cliqueMaxFronteraDeNodo(grafo, n, nodoAux);
+                    vecinosAux = funcionesAux.nodosAdyacentes(grafo, n, nodoAux);
+                    
                     fin = false;
                 }
             }
@@ -33,7 +38,7 @@ public class CMFbusquedaLocal
             {
             nodo = nodoAux;
             maxFrontera = maxFronteraAux;
-            vecinos = funcionesAux.nodosAdyacentes(grafo, n, nodo);
+            vecinos = vecinosAux;
             }
         }
 
@@ -44,7 +49,7 @@ public class CMFbusquedaLocal
 
     public static void main(String[] args)
     {
-        int n = 100;
+        int n = 50;
         
         int m = n*(n-1)/4;
 
