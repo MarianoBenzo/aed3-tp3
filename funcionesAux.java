@@ -217,13 +217,12 @@ public class funcionesAux
 
         for(int i=0;i<m;i++)
         {   
-            long seed = 1L;
-            Random random = new Random(seed);
+            //long seed = 1L;
+            //Random random = new Random(seed);
+            //int ruta = random.nextInt();
+            //ruta = Math.abs(ruta % rutas.size());
 
-            int ruta = random.nextInt();
-            ruta = Math.abs(ruta % rutas.size());
-
-            //int ruta = (int) (Math.random() * rutas.size());
+            int ruta = (int) (Math.random() * rutas.size());
 
             int x = rutas.get(ruta)%n;
             int y = rutas.get(ruta)/n;
