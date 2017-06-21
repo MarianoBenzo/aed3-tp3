@@ -14,7 +14,6 @@ public class CMFexacto
 
 		List<List<Integer>> cliques = funcionesAux.dameCliques(grafo, nodos);
 
-
 		List<Integer> fronteras = new ArrayList<Integer>();
     	
     	for(int i=0;i<cliques.size();i++)
@@ -30,7 +29,7 @@ public class CMFexacto
     {
         int n = 100;
         
-        int m = n*(n-1)/4;
+        int m = n*(n-1)/8;
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 

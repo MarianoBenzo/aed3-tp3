@@ -55,7 +55,7 @@ public class CMFbusquedaLocal
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
-        System.out.println("CMF Primer Nodo: "+CMFgoloso.CMFgoloso(grafo, n));
+        System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
         System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal(grafo, n));
         System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }

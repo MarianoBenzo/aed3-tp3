@@ -65,13 +65,14 @@ public class CMFgrasp
 
     public static void main(String[] args)
     {
-        int n = 150;
+        int n = 100;
         
         int m = n*(n-1)/8;
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
-        System.out.println("CMF Primer Nodo: "+CMFgoloso.CMFgoloso(grafo, n));
+        System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
+        System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal.CMFbusquedaLocal(grafo, n));
         System.out.println("CMF CMFgrasp: "+CMFgrasp(grafo, n));
         System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
