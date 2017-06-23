@@ -20,19 +20,23 @@ public class CMFbusquedaLocal
         List<Integer> cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
         int maxFronteraLocal = maxFronteraNodo;
 
-
         List<Integer> cliqueAux = new ArrayList<Integer>();
 
-        boolean finDos = false;
+
+        List<Integer> nodosUsados = new ArrayList<Integer>();
+        
+
+        //boolean finDos = false;
 
 
         int j = 0;
-        while(j<n && !finDos)
+        while(j<n/* && !finDos*/)
         {
-            finDos = true;
+            //finDos = true;
             
             boolean finUno = false;
             int i = 0;
+
 
             while(i<n && !finUno)
             {   
@@ -57,7 +61,8 @@ public class CMFbusquedaLocal
                     }
 
                 }
-                cliqueMaxFronteraNodo = new ArrayList<Integer>(cliqueAux);
+
+                cliqueMaxFronteraNodo = cliqueAux;
 
                 i++;
             }
@@ -68,33 +73,25 @@ public class CMFbusquedaLocal
 
                 maxFronteraLocal = maxFronteraNodo;
 
-                maxFronteraNodo = 0;
-                
-                /*
                 cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
-                Integer aux = cliqueMaxFronteraNodo.get(0);
-                int aux2 = cliqueMaxFronteraNodo.get(1);
-                cliqueMaxFronteraNodo.clear();
-                cliqueMaxFronteraNodo.add(aux2);
-                */
 
-
-
-                cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
-                Integer aux = cliqueMaxFronteraNodo.get(0);
-                int aux2 = cliqueMaxFronteraNodo.get(1);
-                cliqueMaxFronteraNodo.remove(0);
-
-
-
-                adyacentes = funcionesAux.nodosAdyacentes(grafo, n, aux2);
-                adyacentes.remove(aux);
-
-
-                finDos = false;
+                //finDos = false;
                 
 
             }
+
+            //nodosUsados.add(cliqueMaxFronteraNodo.get(0));
+            Integer aux = cliqueMaxFronteraNodo.get(0);
+            int aux2 = cliqueMaxFronteraNodo.get(1);
+            cliqueMaxFronteraNodo.remove(0);
+
+
+            adyacentes = funcionesAux.nodosAdyacentes(grafo, n, aux2);
+            //adyacentes.removeAll(nodosUsados);
+            adyacentes.remove(aux);
+
+
+            maxFronteraNodo = 0;
             j++;
         }
         return maxFronteraLocal;
@@ -103,7 +100,7 @@ public class CMFbusquedaLocal
 
     public static void main(String[] args)
     {
-        int n = 400;
+        int n = 200;
         
         int m = n*(n-1)/8;
 
@@ -111,7 +108,7 @@ public class CMFbusquedaLocal
 
         System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
         System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal(grafo, n));
-        //System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
+        System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
 
 }
