@@ -52,14 +52,14 @@ public class CMFgoloso
 
     public static void main(String[] args)
     {
-        int n = 200;
+        int n = 300;
         
         int m = n*(n-1)/8;
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
         System.out.println("CMF Goloso: "+CMFgoloso(grafo, n));
-        System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
+        //System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
 
 }
