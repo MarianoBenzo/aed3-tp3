@@ -2,22 +2,14 @@ import java.util.*;
 
 public class CMFgoloso
 {
+    public static List<Integer> CMFgolosoAux(boolean[][] grafo, int n, List<Integer> clique)
+    {   
 
-    public static int CMFgoloso(boolean[][] grafo, int n)
-    {	
+        List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, clique.get(0));
 
-        int nodoInicial = funcionesAux.nodoMayorGrado(grafo, n);
-        //int nodoInicial = (int) (Math.random() * n);
+        List<Integer> cliqueMaxFrontera = new ArrayList<Integer>(clique);
 
-        List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, nodoInicial);
-
-        List<Integer> clique = new ArrayList<Integer>();
-        clique.add(nodoInicial);
-
-        List<Integer> cliqueMaxFrontera = new ArrayList<Integer>();
-        cliqueMaxFrontera.add(nodoInicial);
-
-        int maxFrontera = adyacentes.size();
+        int maxFrontera = funcionesAux.frontera(grafo, n, clique);
 
         boolean fin = false;
 
@@ -28,15 +20,15 @@ public class CMFgoloso
             {
                 if(funcionesAux.formaClique(grafo, clique, adyacente))
                 {
-                    List<Integer> cliqueAux = new ArrayList<Integer>(clique);
-                    cliqueAux.add(adyacente);
+                    List<Integer> nuevaClique = new ArrayList<Integer>(clique);
+                    nuevaClique.add(adyacente);
 
-                    int fronteraAux = funcionesAux.frontera(grafo, n, cliqueAux);
+                    int nuevaFrontera = funcionesAux.frontera(grafo, n, nuevaClique);
 
-                    if(fronteraAux > maxFrontera)
+                    if(nuevaFrontera > maxFrontera)
                     {
-                        maxFrontera = fronteraAux;
-                        cliqueMaxFrontera = cliqueAux;
+                        maxFrontera = nuevaFrontera;
+                        cliqueMaxFrontera = nuevaClique;
 
                         fin = false;
                     }
@@ -46,7 +38,22 @@ public class CMFgoloso
         }
 
 
-        return maxFrontera;
+        return cliqueMaxFrontera;
+    }
+
+
+    public static int CMFgoloso(boolean[][] grafo, int n)
+    {	
+
+        int nodoInicial = funcionesAux.nodoMayorGrado(grafo, n);
+        //int nodoInicial = (int) (Math.random() * n);
+        
+        List<Integer> clique = new ArrayList<Integer>();
+        clique.add(nodoInicial);        
+
+        List<Integer> cliqueMaxFrontera = CMFgolosoAux(grafo, n, clique);
+
+        return funcionesAux.frontera(grafo, n, cliqueMaxFrontera);
     }
 
 

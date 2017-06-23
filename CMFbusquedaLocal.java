@@ -4,52 +4,103 @@ public class CMFbusquedaLocal
 {
 
     public static int CMFbusquedaLocal(boolean[][] grafo, int n)
-    {	
+       {    
 
-        int nodo = funcionesAux.nodoMayorGrado(grafo, n);
-        int maxFrontera = funcionesAux.CMFnodo(grafo, n, nodo);
-        List<Integer> vecinos = funcionesAux.nodosAdyacentes(grafo, n, nodo);
+        int nodoInicial = funcionesAux.nodoMayorGrado(grafo, n);
+        //int nodoInicial = (int) (Math.random() * n);
 
-        boolean fin = false;
+        List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, nodoInicial);
 
-        int nodoAux = 0;
-        int maxFronteraAux = 0;
-        List<Integer> vecinosAux = new ArrayList<Integer>();
- 
-        while(!fin)
+
+        List<Integer> cliqueMaxFronteraNodo = new ArrayList<Integer>();
+        cliqueMaxFronteraNodo.add(nodoInicial);      
+        int maxFronteraNodo = adyacentes.size();
+
+
+        List<Integer> cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
+        int maxFronteraLocal = maxFronteraNodo;
+
+        List<Integer> cliqueAux = new ArrayList<Integer>();
+
+
+        List<Integer> nodosUsados = new ArrayList<Integer>();
+        
+
+        //boolean finDos = false;
+
+
+        int j = 0;
+        while(j<n/* && !finDos*/)
         {
-            fin = true;
+            //finDos = true;
+            
+            boolean finUno = false;
+            int i = 0;
 
-            for(int i=0;i<vecinos.size();i++)
+
+            while(i<n && !finUno)
             {   
-                int CMFnodo = funcionesAux.CMFnodo(grafo, n, vecinos.get(i));
-                if(CMFnodo > maxFrontera)
-                {
-                    nodoAux = vecinos.get(i);
-                    maxFronteraAux = CMFnodo;
-                    //vecinosAux = funcionesAux.cliqueMaxFronteraDeNodo(grafo, n, nodoAux);
-                    vecinosAux = funcionesAux.nodosAdyacentes(grafo, n, nodoAux);
-                    
-                    fin = false;
+                finUno = true;
+
+                for(int adyacente : adyacentes)
+                {   
+
+                    if(funcionesAux.formaClique(grafo, cliqueMaxFronteraNodo, adyacente))
+                    {
+                        List<Integer> nuevaClique = new ArrayList<Integer>(cliqueMaxFronteraNodo);
+                        nuevaClique.add(adyacente);
+
+                        int nuevaFrontera = funcionesAux.frontera(grafo, n, nuevaClique);
+
+                        if(nuevaFrontera > maxFronteraNodo)
+                        {   
+                            maxFronteraNodo = nuevaFrontera;
+                            cliqueAux = new ArrayList<Integer>(nuevaClique);
+                            finUno = false;
+                        }
+                    }
+
                 }
+
+                cliqueMaxFronteraNodo = cliqueAux;
+
+                i++;
             }
 
-            if(!fin)
-            {
-            nodo = nodoAux;
-            maxFrontera = maxFronteraAux;
-            vecinos = vecinosAux;
+
+            if(maxFronteraLocal < maxFronteraNodo)
+            {   
+
+                maxFronteraLocal = maxFronteraNodo;
+
+                cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
+
+                //finDos = false;
+                
+
             }
+
+            //nodosUsados.add(cliqueMaxFronteraNodo.get(0));
+            Integer aux = cliqueMaxFronteraNodo.get(0);
+            int aux2 = cliqueMaxFronteraNodo.get(1);
+            cliqueMaxFronteraNodo.remove(0);
+
+
+            adyacentes = funcionesAux.nodosAdyacentes(grafo, n, aux2);
+            //adyacentes.removeAll(nodosUsados);
+            adyacentes.remove(aux);
+
+
+            maxFronteraNodo = 0;
+            j++;
         }
-
-
-        return maxFrontera;
+        return maxFronteraLocal;
     }
 
 
     public static void main(String[] args)
     {
-        int n = 100;
+        int n = 200;
         
         int m = n*(n-1)/8;
 

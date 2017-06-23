@@ -27,9 +27,9 @@ public class CMFexacto
 
     public static void main(String[] args)
     {
-        int n = 100;
+        int n = 25;
         
-        int m = n*(n-1)/8;
+        int m = n*(n-1)/2;
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
