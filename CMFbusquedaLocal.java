@@ -4,10 +4,19 @@ public class CMFbusquedaLocal
 {
 
     public static int CMFbusquedaLocal(boolean[][] grafo, int n)
-       {    
-
+    {  
+        
         int nodoInicial = funcionesAux.nodoMayorGrado(grafo, n);
         //int nodoInicial = (int) (Math.random() * n);
+
+        List<Integer> cliqueMaxFronteraLocal = CMFbusquedaLocalAux(grafo, n, nodoInicial);
+
+        return funcionesAux.frontera(grafo, n, cliqueMaxFronteraLocal);
+
+    }
+
+    public static List<Integer> CMFbusquedaLocalAux(boolean[][] grafo, int n, int nodoInicial)
+    {    
 
         List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, nodoInicial);
 
@@ -65,7 +74,7 @@ public class CMFbusquedaLocal
 
         }
 
-        return maxFronteraLocal;
+        return cliqueMaxFronteraLocal;
     }
 
 
