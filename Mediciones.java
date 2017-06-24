@@ -6,34 +6,59 @@ public class Mediciones {
 
 	public static void main(String[] args)
     {
-		int n = 100;
-		int m = n*(n-1)/8;
-    	getAciertos(n, m, 1000);
+		//int n = 100;
+		//int m = n*(n-1)/8;
+    	//getAciertos(n, m, 1000);
+		
 		//escribirMedicionesGrafosCompletos(200, 1, "tiempos.txt");
+
+		escribirMediciones(100, 10, "goloso.txt");
     }
 
+/*
 	public static void escribirMedicionesGrafosCompletos(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
 		List<boolean[][]> grafos = funcionesAux.getGrafosAleatorios(cantidadDeGrafos);
         List<Long> mediciones = getMediciones(grafos, cantidadMedicionesXInstancia);
         EntradaSalida.escribirTiempos(mediciones, nombreArchivo);
 	}
 
-	public static List<Long> getMediciones(List<boolean[][]> grafos, int cantidadMedicionesXInstancia) {
+*/
+
+	public static void escribirMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
+
+        List<Long> mediciones = getMediciones(cantidadDeGrafos, cantidadMedicionesXInstancia);
+        EntradaSalida.escribirTiempos(mediciones, nombreArchivo);
+
+	}
+
+
+	public static List<Long> getMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia) {
 		List<Long> mediciones = new ArrayList<Long>();
-		int n = 1;
-		for (boolean[][] grafo : grafos) {
-			mediciones.add(promedioDeMediciones(grafo, n, cantidadMedicionesXInstancia));
+		
+		int n = 2;
+		int m = (n*(n-1)/2);
+		for (int i = 0; i < cantidadDeGrafos; i++) {
+			
+			mediciones.add(promedioDeMediciones(n, m, cantidadMedicionesXInstancia));
+			
 			n++;
+			m = (n*(n-1)/2);
 		}
 		return mediciones;
 	}
 	
-	public static Long promedioDeMediciones(boolean[][] grafo, int n, int cantidadDeMediciones) {
+	public static Long promedioDeMediciones(int n, int m, int cantidadDeMediciones) {
 		Long tiempoTotal = new Long(0);
 		for (int i = 0; i < cantidadDeMediciones; i++) {
-			long tiempoIncial = System.currentTimeMillis();
-			CMFexacto.CMFexacto(grafo, n);		
-			long tiempoFinal = System.currentTimeMillis();
+			boolean[][] grafo = funcionesAux.grafoRandom(n, m);
+
+			long tiempoIncial = System.nanoTime();
+			//CMFexacto.CMFexacto(grafo, n);
+			CMFgoloso.CMFgoloso(grafo, n);
+			//CMFbusquedaLocal.CMFbusquedaLocal(grafo, n);
+			//CMFgrasp.CMFgrasp(grafo, n);		
+			long tiempoFinal = System.nanoTime();
+			
 			tiempoTotal += tiempoFinal - tiempoIncial;
 		}
 		return tiempoTotal / cantidadDeMediciones;
