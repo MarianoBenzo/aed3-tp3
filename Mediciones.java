@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
+import java.util.*;
 
 public class Mediciones {
 
@@ -7,7 +8,7 @@ public class Mediciones {
     {
 		int n = 100;
 		int m = n*(n-1)/8;
-    	getAciertos(n, m, 10);
+    	getAciertos(n, m, 1000);
 		//escribirMedicionesGrafosCompletos(200, 1, "tiempos.txt");
     }
 
@@ -31,7 +32,7 @@ public class Mediciones {
 		Long tiempoTotal = new Long(0);
 		for (int i = 0; i < cantidadDeMediciones; i++) {
 			long tiempoIncial = System.currentTimeMillis();
-			CMFExacto.CMFexacto(grafo, n);		
+			CMFexacto.CMFexacto(grafo, n);		
 			long tiempoFinal = System.currentTimeMillis();
 			tiempoTotal += tiempoFinal - tiempoIncial;
 		}
@@ -46,7 +47,7 @@ public class Mediciones {
 
 		for (int i = 0; i < cantidadDeInstancias; i++)
 		{
-			boolean[][] grafo =  grafoRandom(n, m);
+			boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
 			int exacto = CMFexacto.CMFexacto(grafo, n);
 			aciertos[0]++;
@@ -71,7 +72,7 @@ public class Mediciones {
 
 		}
 
-		System.out.println("Aciertos: "+aciertos);
+		System.out.println("Aciertos: "+Arrays.toString(aciertos));
 		return aciertos;
 	}
 	
