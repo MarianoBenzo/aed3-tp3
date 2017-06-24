@@ -19,17 +19,13 @@ public class funcionesAux
     public static List<Integer> nodosFrontera(boolean[][] grafo, int n, List<Integer> clique)
     {
         List<Integer> nodosFrontera = new ArrayList<Integer>();
-
         for(int i=0;i<clique.size();i++)
         {
             nodosFrontera.addAll(nodosAdyacentes(grafo, n, clique.get(i)));
         }
-
         nodosFrontera.removeAll(clique);
-
         return nodosFrontera;
     }
-
 */
     //nodosAdyacentes = Devuelve los nodos adyacentes al nodo ingresado, en forma de array.
     public static List<Integer> nodosAdyacentes(boolean[][] grafo, int n, int nodo)
@@ -149,13 +145,9 @@ public class funcionesAux
     public static List<Integer> cliqueMaxFronteraDeNodo(boolean[][] grafo, int n, int nodo)
     {
         List<Integer> adyacentes = nodosAdyacentes(grafo, n, nodo);
-
         List<List<Integer>> cliques = cliquesDeNodo(grafo, n, nodo);
-
         int fronteraMax = 0;
-
         List<Integer> cliqueMax = null;
-
         for(int i=0;i<cliques.size();i++)
         {
             if(frontera(grafo, n, cliques.get(i)) > fronteraMax)
@@ -164,7 +156,6 @@ public class funcionesAux
                 fronteraMax = frontera(grafo, n, cliques.get(i));
             }
         }
-
         return cliqueMax;
     }  
 */
@@ -235,7 +226,32 @@ public class funcionesAux
         return grafo;
     } 
 
+	static boolean[][] crearGrafoCompleto(int n) {
+		boolean[][] grafo = new boolean[n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				grafo[i][j] = !(i == j); 
+			}
+		}
+		return grafo;
+	}
 
+	static List<boolean[][]> getGrafosCompletos(int n) {
+		List<boolean[][]> grafos = new ArrayList<boolean[][]>();
+		for (int i = 1; i < n; i++) {
+			grafos.add(crearGrafoCompleto(i));
+		}
+		return grafos;
+	}
+
+	static List<boolean[][]> getGrafosAleatorios(int n) {
+        int m = n*(n-1)/5;
+		List<boolean[][]> grafos = new ArrayList<boolean[][]>();
+		for (int i = 1; i < n; i++) {
+			grafos.add(funcionesAux.grafoRandom(n, m));
+		}
+		return grafos;
+	}
 
     public static void printGrafo(boolean[][] grafo)
     {   
@@ -261,5 +277,6 @@ public class funcionesAux
         printGrafo(grafo);      
 
     }
+    
+
 }
-	
