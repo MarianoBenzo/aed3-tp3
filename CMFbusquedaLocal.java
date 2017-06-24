@@ -44,8 +44,15 @@ public class CMFbusquedaLocal
                 Integer aux = clique.get(nodo);
                 clique.remove(nodo);
 
-                adyacentes = funcionesAux.nodosAdyacentes(grafo, n, clique.get(0));
-                adyacentes.remove(aux); 
+                if(clique.size() > 0)
+                {
+                    adyacentes = funcionesAux.nodosAdyacentes(grafo, n, clique.get(0));
+                    adyacentes.remove(aux); 
+                }
+                else
+                {
+                    adyacentes.clear();
+                }
 
                 clique = CMFgoloso.CMFgolosoAux(grafo, n, clique, adyacentes);
                 int frontera = funcionesAux.frontera(grafo, n, clique);

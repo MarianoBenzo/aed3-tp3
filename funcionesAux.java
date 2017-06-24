@@ -236,6 +236,7 @@ public class funcionesAux
 		return grafo;
 	}
 
+
 	static List<boolean[][]> getGrafosCompletos(int n) {
 		List<boolean[][]> grafos = new ArrayList<boolean[][]>();
 		for (int i = 1; i < n; i++) {
@@ -243,6 +244,7 @@ public class funcionesAux
 		}
 		return grafos;
 	}
+
 
 	static List<boolean[][]> getGrafosAleatorios(int n) {
         int m = n*(n-1)/5;
@@ -252,6 +254,7 @@ public class funcionesAux
 		}
 		return grafos;
 	}
+
 
     public static void printGrafo(boolean[][] grafo)
     {   

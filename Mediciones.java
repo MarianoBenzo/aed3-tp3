@@ -5,7 +5,10 @@ public class Mediciones {
 
 	public static void main(String[] args)
     {
-		escribirMedicionesGrafosCompletos(200, 1, "tiempos.txt");
+		int n = 100;
+		int m = n*(n-1)/8;
+    	getAciertos(n, m, 10);
+		//escribirMedicionesGrafosCompletos(200, 1, "tiempos.txt");
     }
 
 	public static void escribirMedicionesGrafosCompletos(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
@@ -13,6 +16,7 @@ public class Mediciones {
         List<Long> mediciones = getMediciones(grafos, cantidadMedicionesXInstancia);
         EntradaSalida.escribirTiempos(mediciones, nombreArchivo);
 	}
+
 	public static List<Long> getMediciones(List<boolean[][]> grafos, int cantidadMedicionesXInstancia) {
 		List<Long> mediciones = new ArrayList<Long>();
 		int n = 1;
@@ -32,6 +36,43 @@ public class Mediciones {
 			tiempoTotal += tiempoFinal - tiempoIncial;
 		}
 		return tiempoTotal / cantidadDeMediciones;
+	}
+
+
+
+	public static int[] getAciertos(int n, int m, int cantidadDeInstancias) {
+
+		int[] aciertos = {0,0,0,0};
+
+		for (int i = 0; i < cantidadDeInstancias; i++)
+		{
+			boolean[][] grafo =  grafoRandom(n, m);
+
+			int exacto = CMFexacto.CMFexacto(grafo, n);
+			aciertos[0]++;
+
+			int goloso = CMFgoloso.CMFgoloso(grafo, n);
+			if(exacto == goloso)
+			{
+				aciertos[1]++;
+			}
+
+			int busquedaLocal = CMFbusquedaLocal.CMFbusquedaLocal(grafo, n);
+			if(exacto == busquedaLocal)
+			{
+				aciertos[2]++;
+			}
+
+			int grasp = CMFgrasp.CMFgrasp(grafo, n);
+			if(exacto == grasp)
+			{
+				aciertos[3]++;
+			}
+
+		}
+
+		System.out.println("Aciertos: "+aciertos);
+		return aciertos;
 	}
 	
 }

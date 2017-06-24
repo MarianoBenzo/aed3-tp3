@@ -6,12 +6,12 @@ public class CMFgrasp
     public static int CMFgrasp(boolean[][] grafo, int n)
     {	
 
-        //int nodo = funcionesAux.nodoMayorGrado(grafo, n);
+        int nodo = funcionesAux.nodoMayorGrado(grafo, n);
+        
         int maxFrontera = 0;
 
         for(int j=0;j<n/10;j++)
         {
-            int nodo = (int) (Math.random() * n);
 
             int frontera = CMFbusquedaLocal.CMFbusquedaLocalAux(grafo, n, nodo);
 
@@ -20,6 +20,7 @@ public class CMFgrasp
                 maxFrontera = frontera;
             }
             
+            nodo = (int) (Math.random() * n);
 
         }
 
@@ -29,7 +30,7 @@ public class CMFgrasp
 
     public static void main(String[] args)
     {
-        int n = 300;
+        int n = 200;
         
         int m = n*(n-1)/8;
 
