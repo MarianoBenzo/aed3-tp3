@@ -29,7 +29,7 @@ public class CMFexacto
     {
         int n = 100;
         
-        int m = n*(n-1)/8;
+        int m = n*(n-1)/4;
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 

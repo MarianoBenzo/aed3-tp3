@@ -1,0 +1,40 @@
+Aciertos:
+
+	Cantidad de mediciones = 100
+
+	n = 100
+	m = n*(n-1)/4
+
+	CMF Goloso = 1 				1%
+	CMF Busqueda Local = 8 		8%
+	CMF Grasp = 45				45%
+
+
+													Iniciando con nodos aleaotrios:
+													
+	Cantidad de mediciones = 1000						Cantidad de mediciones = 1000						
+
+	n = 100 											n = 100
+	m = n*(n-1)/8 										m = n*(n-1)/8 
+
+	CMF Goloso = 165			16,5%					CMF Goloso = 30				3%
+	CMF Busqueda Local = 239	23,9%					CMF Busqueda Local = 127	12,7%
+	CMF Grasp = 681				68,1%					CMF Grasp = 657				65,7%
+
+
+
+	n = 100
+	m = n*(n-1)/16
+
+	CMF Goloso = 250			25%
+	CMF Busqueda Local = 305	30,5%
+	CMF Grasp = 815				81,5%
+
+
+
+	n = 100
+	m = n*(n-1)/32
+
+	CMF Goloso = 471			47,1%
+	CMF Busqueda Local = 532	53,2%
+	CMF Grasp = 944				94,4%

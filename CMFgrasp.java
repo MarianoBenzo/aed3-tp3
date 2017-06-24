@@ -7,6 +7,7 @@ public class CMFgrasp
     {	
 
         int nodo = funcionesAux.nodoMayorGrado(grafo, n);
+        //int nodo = (int) (Math.random() * n);
         
         int maxFrontera = 0;
 
