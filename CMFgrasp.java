@@ -7,65 +7,29 @@ public class CMFgrasp
     {	
 
         //int nodo = funcionesAux.nodoMayorGrado(grafo, n);
-        int nodo = (int) (Math.random() * n);
-        int maxFrontera = funcionesAux.CMFnodo(grafo, n, nodo);
-        List<Integer> vecinos = funcionesAux.nodosAdyacentes(grafo, n, nodo);
-
-        int res = 0;
+        int maxFrontera = 0;
 
         for(int j=0;j<n/10;j++)
         {
+            int nodo = (int) (Math.random() * n);
 
-            boolean fin = false;
+            int frontera = CMFbusquedaLocal.CMFbusquedaLocalAux(grafo, n, nodo);
 
-            int nodoAux = 0;
-            int maxFronteraAux = 0;
-            List<Integer> vecinosAux = new ArrayList<Integer>();
-     
-            while(!fin)
+            if(maxFrontera < frontera)
             {
-                fin = true;
-    
-                for(int i=0;i<vecinos.size();i++)
-                {   
-                    int CMFnodo = funcionesAux.CMFnodo(grafo, n, vecinos.get(i));
-                    if(CMFnodo > maxFrontera)
-                    {
-                        nodoAux = vecinos.get(i);
-                        maxFronteraAux = CMFnodo;
-                        //vecinosAux = funcionesAux.cliqueMaxFronteraDeNodo(grafo, n, nodoAux);
-                        vecinosAux = funcionesAux.nodosAdyacentes(grafo, n, nodoAux);
-                        
-                        fin = false;
-                    }
-                }
-
-                if(!fin)
-                {
-                nodo = nodoAux;
-                maxFrontera = maxFronteraAux;
-                vecinos = vecinosAux;
-                }
+                maxFrontera = frontera;
             }
-
-            if(maxFrontera > res)
-            {
-                res = maxFrontera;
-            }
-
-            nodo = (int) (Math.random() * n);
-            maxFrontera = funcionesAux.CMFnodo(grafo, n, nodo);
-            vecinos = funcionesAux.nodosAdyacentes(grafo, n, nodo);
+            
 
         }
 
-        return res;
+        return maxFrontera;
     }
 
 
     public static void main(String[] args)
     {
-        int n = 100;
+        int n = 300;
         
         int m = n*(n-1)/8;
 
@@ -73,7 +37,7 @@ public class CMFgrasp
 
         System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
         System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal.CMFbusquedaLocal(grafo, n));
-        System.out.println("CMF CMFgrasp: "+CMFgrasp(grafo, n));
+        System.out.println("CMF Grasp: "+CMFgrasp(grafo, n));
         System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
 
