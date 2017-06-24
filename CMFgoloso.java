@@ -2,10 +2,10 @@ import java.util.*;
 
 public class CMFgoloso
 {
-    public static List<Integer> CMFgolosoAux(boolean[][] grafo, int n, List<Integer> clique)
+    public static List<Integer> CMFgolosoAux(boolean[][] grafo, int n, List<Integer> clique, List<Integer> adyacentes)
     {   
 
-        List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, clique.get(0));
+        //List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, clique.get(0));
 
         List<Integer> cliqueMaxFrontera = new ArrayList<Integer>(clique);
 
@@ -13,10 +13,10 @@ public class CMFgoloso
 
         boolean fin = false;
 
-        while(!fin)
+        while(!fin) //a lo sumo n ciclos
         {   
             fin = true;
-            for(int adyacente : adyacentes)
+            for(int adyacente : adyacentes) //a lo sumo n ciclos
             {
                 if(funcionesAux.formaClique(grafo, clique, adyacente))
                 {
@@ -51,7 +51,9 @@ public class CMFgoloso
         List<Integer> clique = new ArrayList<Integer>();
         clique.add(nodoInicial);        
 
-        List<Integer> cliqueMaxFrontera = CMFgolosoAux(grafo, n, clique);
+        List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, nodoInicial);
+
+        List<Integer> cliqueMaxFrontera = CMFgolosoAux(grafo, n, clique, adyacentes); //Complejidad n^2
 
         return funcionesAux.frontera(grafo, n, cliqueMaxFrontera);
     }

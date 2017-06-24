@@ -12,88 +12,59 @@ public class CMFbusquedaLocal
         List<Integer> adyacentes = funcionesAux.nodosAdyacentes(grafo, n, nodoInicial);
 
 
-        List<Integer> cliqueMaxFronteraNodo = new ArrayList<Integer>();
-        cliqueMaxFronteraNodo.add(nodoInicial);      
-        int maxFronteraNodo = adyacentes.size();
+        List<Integer> clique = new ArrayList<Integer>();
+        clique.add(nodoInicial);
+
+        clique = CMFgoloso.CMFgolosoAux(grafo, n, clique, adyacentes);
 
 
-        List<Integer> cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
-        int maxFronteraLocal = maxFronteraNodo;
 
-        List<Integer> cliqueAux = new ArrayList<Integer>();
+        List<Integer> cliqueMaxFrontera = new ArrayList<Integer>(clique);
+        int maxFrontera = funcionesAux.frontera(grafo, n, clique);
 
-
-        List<Integer> nodosUsados = new ArrayList<Integer>();
-        
-
-        //boolean finDos = false;
+        List<Integer> cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFrontera);
+        int maxFronteraLocal = maxFrontera;
 
 
-        int j = 0;
-        while(j<n/* && !finDos*/)
-        {
-            //finDos = true;
-            
-            boolean finUno = false;
-            int i = 0;
+        boolean fin = false;
+        while(!fin)// a lo sumo n veces
+        {   
+            fin = true;
+            clique = new ArrayList<Integer>(cliqueMaxFrontera);
 
-
-            while(i<n && !finUno)
-            {   
-                finUno = true;
-
-                for(int adyacente : adyacentes)
-                {   
-
-                    if(funcionesAux.formaClique(grafo, cliqueMaxFronteraNodo, adyacente))
-                    {
-                        List<Integer> nuevaClique = new ArrayList<Integer>(cliqueMaxFronteraNodo);
-                        nuevaClique.add(adyacente);
-
-                        int nuevaFrontera = funcionesAux.frontera(grafo, n, nuevaClique);
-
-                        if(nuevaFrontera > maxFronteraNodo)
-                        {   
-                            maxFronteraNodo = nuevaFrontera;
-                            cliqueAux = new ArrayList<Integer>(nuevaClique);
-                            finUno = false;
-                        }
-                    }
-
-                }
-
-                cliqueMaxFronteraNodo = cliqueAux;
-
-                i++;
-            }
-
-
-            if(maxFronteraLocal < maxFronteraNodo)
+            for(int nodo=0;nodo<clique.size();nodo++)
             {   
 
-                maxFronteraLocal = maxFronteraNodo;
+                Integer aux = clique.get(nodo);
+                clique.remove(nodo);
 
-                cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFronteraNodo);
+                adyacentes = funcionesAux.nodosAdyacentes(grafo, n, clique.get(0));
+                adyacentes.remove(aux); 
 
-                //finDos = false;
+                clique = CMFgoloso.CMFgolosoAux(grafo, n, clique, adyacentes);
+                int frontera = funcionesAux.frontera(grafo, n, clique);
                 
+                if(maxFrontera < frontera)
+                {   
+                    maxFrontera = frontera;
 
+                    cliqueMaxFrontera = new ArrayList<Integer>(clique);
+                }
+            }
+            
+
+            if(maxFronteraLocal < maxFrontera)
+            {   
+                maxFronteraLocal = maxFrontera;
+
+                cliqueMaxFronteraLocal = new ArrayList<Integer>(cliqueMaxFrontera);
+
+                fin = false;
             }
 
-            //nodosUsados.add(cliqueMaxFronteraNodo.get(0));
-            Integer aux = cliqueMaxFronteraNodo.get(0);
-            int aux2 = cliqueMaxFronteraNodo.get(1);
-            cliqueMaxFronteraNodo.remove(0);
 
-
-            adyacentes = funcionesAux.nodosAdyacentes(grafo, n, aux2);
-            //adyacentes.removeAll(nodosUsados);
-            adyacentes.remove(aux);
-
-
-            maxFronteraNodo = 0;
-            j++;
         }
+
         return maxFronteraLocal;
     }
 
@@ -108,7 +79,7 @@ public class CMFbusquedaLocal
 
         System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
         System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal(grafo, n));
-        System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
+        //System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
 
 }
