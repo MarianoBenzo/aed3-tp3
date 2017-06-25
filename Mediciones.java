@@ -6,13 +6,32 @@ public class Mediciones {
 
 	public static void main(String[] args)
     {
-		//int n = 100;
-		//int m = n*(n-1)/8;
-    	//getAciertos(n, m, 1000);
 		
-		//escribirMedicionesGrafosCompletos(200, 1, "tiempos.txt");
+    	
+    	//int cantGrafos = 300;
+		//escribirMediciones(cantGrafos, 30, "Complejidad grasp.txt");
 
-		escribirMediciones(100, 10, "goloso.txt");
+
+	  	int cantGrafos = (50*(50-1)/2)-1;
+		escribirMediciones(cantGrafos, 30, "Complejidad aristas goloso.txt");
+
+
+		//int cantidadDeGrafos = 150;
+		//int cantidadMedicionesXInstancia = 200;
+		//escribirMedicionesAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia, "Aciertos por nodo goloso.txt");		
+		//escribirMedicionesAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia, "Aciertos por nodo nodoInicial Random goloso.txt");		
+
+		//int n = 15;
+		//int cantidadDeGrafos = n*(n-1)/2;
+		//int cantidadMedicionesXInstancia = 200;
+		//escribirMedicionesAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia, "Aciertos por arista goloso.txt");
+		//escribirMedicionesAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia, "Aciertos por arista nodoInicial Random goloso.txt");
+
+
+		//int cantidadDeGrafos = 8;
+		//int cantidadMedicionesXInstancia = 20;
+		//escribirMedicionesAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia, "Aciertos por subgrafos goloso.txt");
+		
     }
 
 /*
@@ -35,14 +54,22 @@ public class Mediciones {
 	public static List<Long> getMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia) {
 		List<Long> mediciones = new ArrayList<Long>();
 		
-		int n = 2;
-		int m = (n*(n-1)/2);
+		int n = 50;
+		int m = 1;
+		
+		//int n = 2;
+		//int m = (n*(n-1)/8)+1;
+
 		for (int i = 0; i < cantidadDeGrafos; i++) {
+			
+			System.out.println(i);
 			
 			mediciones.add(promedioDeMediciones(n, m, cantidadMedicionesXInstancia));
 			
-			n++;
-			m = (n*(n-1)/2);
+			//n++;
+			//m = (n*(n-1)/8)+1;
+
+			m++;
 		}
 		return mediciones;
 	}
@@ -53,10 +80,12 @@ public class Mediciones {
 			boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
 			long tiempoIncial = System.nanoTime();
-			//CMFexacto.CMFexacto(grafo, n);
-			CMFgoloso.CMFgoloso(grafo, n);
+			
+			CMFexacto.CMFexacto(grafo, n);
+			//CMFgoloso.CMFgoloso(grafo, n);
 			//CMFbusquedaLocal.CMFbusquedaLocal(grafo, n);
 			//CMFgrasp.CMFgrasp(grafo, n);		
+			
 			long tiempoFinal = System.nanoTime();
 			
 			tiempoTotal += tiempoFinal - tiempoIncial;
@@ -66,39 +95,81 @@ public class Mediciones {
 
 
 
-	public static int[] getAciertos(int n, int m, int cantidadDeInstancias) {
 
-		int[] aciertos = {0,0,0,0};
 
-		for (int i = 0; i < cantidadDeInstancias; i++)
+
+
+
+
+	public static void escribirMedicionesAciertos(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
+
+        List<Float> mediciones = getAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia);
+        EntradaSalida.escribirAciertos(mediciones, nombreArchivo);
+
+	}
+
+
+
+
+	public static List<Float> getAciertos(int cantidadDeGrafos, int cantidadMedicionesXInstancia) {
+		List<Float> mediciones = new ArrayList<Float>();
+
+		int n = 2;//por nodo
+		int m = (n*(n-1)/32)+1;//por nodo
+		
+		//int n = 15;//por arista
+		//int m = 1;//por arista
+		
+		//int n = 50;//por subgrafo
+		//int m = 1;//por subgrafo
+
+		for (int i = 0; i < cantidadDeGrafos; i++) {
+			
+			System.out.println(i);
+			
+			mediciones.add(promedioDeAciertos(n, m, cantidadMedicionesXInstancia));
+			
+			n++;//por nodo
+			m = (n*(n-1)/32)+1;//por nodo
+
+			//m++;//por arista
+
+			//m++;//por subgrafo
+		}
+		return mediciones;
+	}	
+
+
+
+
+	public static Float promedioDeAciertos(int n, int m, int cantidadDeMediciones) {
+		
+		Float aciertos = new Float(0);
+		Float promedio = new Float(0);
+
+		for (int i = 0; i < cantidadDeMediciones; i++)
 		{
 			boolean[][] grafo = funcionesAux.grafoRandom(n, m);
+			//boolean[][] grafo = funcionesAux.crearGrafoDisconexo(n, m);//por subgrafo, n = nodos por subgrafo, m = cantidad de subgrafos, cantidad de aristas por subgrafo = n*(n-1)/16
+
 
 			int exacto = CMFexacto.CMFexacto(grafo, n);
-			aciertos[0]++;
+			
+			int prueba = CMFgoloso.CMFgoloso(grafo, n);
+			//int prueba = CMFbusquedaLocal.CMFbusquedaLocal(grafo, n);
+			//int prueba = CMFgrasp.CMFgrasp(grafo, n);		
 
-			int goloso = CMFgoloso.CMFgoloso(grafo, n);
-			if(exacto == goloso)
+			if(exacto == prueba)
 			{
-				aciertos[1]++;
+				aciertos++;
 			}
-
-			int busquedaLocal = CMFbusquedaLocal.CMFbusquedaLocal(grafo, n);
-			if(exacto == busquedaLocal)
-			{
-				aciertos[2]++;
-			}
-
-			int grasp = CMFgrasp.CMFgrasp(grafo, n);
-			if(exacto == grasp)
-			{
-				aciertos[3]++;
-			}
-
 		}
 
-		System.out.println("Aciertos: "+Arrays.toString(aciertos));
-		return aciertos;
+		promedio = aciertos * 100 / cantidadDeMediciones;
+
+		return promedio;
 	}
-	
+
+
+
 }

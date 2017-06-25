@@ -1,0 +1,35 @@
+Experimentos:
+		
+	Complejidad:	(30 mediciones por instancia)
+		Por nodos:
+			Grafos con n = 2 a 300 y m = n*(n-1)/8
+			Grafico: Complejidades.png
+
+		Por aristas:
+			Grafos con n = 50 y m = 50*(50-1)/2 = 1225 (maxima cantidad de aristas para un grafo de 50 nodos) Aclaracion: por temas de tiempo, el algoritmo exacto solo llega a 600 aristas
+			Grafico: Complejidades aristas.png
+
+
+	Aciertos:		(200 mediciones por instancia)
+		NodoInicial Mayor Grado:
+			Por nodos:
+				Grafos con n = 2 a 150 y m = n*(n-1)/32
+				Grafico: Acierto por nodo.png
+
+			Por aristas:
+				Grafos con n = 15 y m = 1 a n*(n-1)/2 (105)
+				Grafico: Acierto por arista.png
+
+
+		NodoInicial Random:
+			Por nodos:
+				Grafos con n = 2 a 150 y m = n*(n-1)/32
+				Grafico: Aciertos por nodo nodoInicial Random.png
+
+			Por aristas:
+				Grafos con n = 15 y m = 1 a n*(n-1)/2 (105)
+				Grafico: Aciertos por arista nodoInicial Random.png
+
+		SubGrafos:	(20 mediciones por instancia)
+			Grafos con de 1 a 8 subgrafos conexos, cada subgrafo conexo con n = 50 y m = n*(n-1)/16 (153)
+			Grafico: Aciertos por subgrafos.png

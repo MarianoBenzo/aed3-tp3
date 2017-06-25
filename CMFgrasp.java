@@ -11,7 +11,7 @@ public class CMFgrasp
         
         int maxFrontera = 0;
 
-        for(int j=0;j<n/10;j++)
+        for(int j=0;j<(n/10)+1;j++)
         {
 
             int frontera = CMFbusquedaLocal.CMFbusquedaLocalAux(grafo, n, nodo);
@@ -31,16 +31,16 @@ public class CMFgrasp
 
     public static void main(String[] args)
     {
-        int n = 200;
+        int n = 50;
         
-        int m = n*(n-1)/8;
+        int m = (n*(n-1)/2)-1;
 
         boolean[][] grafo = funcionesAux.grafoRandom(n, m);
 
         System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
         System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal.CMFbusquedaLocal(grafo, n));
         System.out.println("CMF Grasp: "+CMFgrasp(grafo, n));
-        System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
+        //System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
     }
 
 }

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Random;
 
 public class funcionesAux
 {
@@ -213,7 +214,9 @@ public class funcionesAux
             //int ruta = random.nextInt();
             //ruta = Math.abs(ruta % rutas.size());
 
-            int ruta = (int) (Math.random() * rutas.size());
+//          Random rnd = new Random();
+ //           rnd.setSeed(Calendar.getInstance().get(Calendar.SECOND));
+            int ruta = (int) (Math.random()/*rnd.nextDouble()*/ * rutas.size());
 
             int x = rutas.get(ruta)%n;
             int y = rutas.get(ruta)/n;
@@ -226,34 +229,34 @@ public class funcionesAux
         return grafo;
     } 
 
-	static boolean[][] crearGrafoCompleto(int n) {
-		boolean[][] grafo = new boolean[n][n];
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				grafo[i][j] = !(i == j); 
-			}
-		}
-		return grafo;
-	}
+    static boolean[][] crearGrafoCompleto(int n) {
+        boolean[][] grafo = new boolean[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                grafo[i][j] = !(i == j); 
+            }
+        }
+        return grafo;
+    }
 
 
-	static List<boolean[][]> getGrafosCompletos(int n) {
-		List<boolean[][]> grafos = new ArrayList<boolean[][]>();
-		for (int i = 1; i < n; i++) {
-			grafos.add(crearGrafoCompleto(i));
-		}
-		return grafos;
-	}
+    static List<boolean[][]> getGrafosCompletos(int n) {
+        List<boolean[][]> grafos = new ArrayList<boolean[][]>();
+        for (int i = 1; i < n; i++) {
+            grafos.add(crearGrafoCompleto(i));
+        }
+        return grafos;
+    }
 
 
-	static List<boolean[][]> getGrafosAleatorios(int n) {
+    static List<boolean[][]> getGrafosAleatorios(int n) {
         int m = n*(n-1)/5;
-		List<boolean[][]> grafos = new ArrayList<boolean[][]>();
-		for (int i = 1; i < n; i++) {
-			grafos.add(funcionesAux.grafoRandom(n, m));
-		}
-		return grafos;
-	}
+        List<boolean[][]> grafos = new ArrayList<boolean[][]>();
+        for (int i = 1; i < n; i++) {
+            grafos.add(funcionesAux.grafoRandom(n, m));
+        }
+        return grafos;
+    }
 
 
     public static void printGrafo(boolean[][] grafo)
@@ -263,12 +266,49 @@ public class funcionesAux
         System.out.println("Grafo: ");
         for(int i=0;i<n;i++)
         {
-            System.out.println(Arrays.toString(grafo[i]));
+            System.out.println(Arrays.toString(grafo[i]).replaceAll("true", "1").replaceAll("false", "0"));
         }
         System.out.println(" ");
     }
 
+    
+    public static boolean[][] crearGrafoDisconexo(int cantidadDeNodosPorGrafo, int cantidadDeGrafosConexos) {
+        int cantidadDeNodos = cantidadDeNodosPorGrafo * cantidadDeGrafosConexos;
+        boolean[][] grafoResultado = new boolean[cantidadDeNodos][cantidadDeNodos];
+        inicializarGrafo(grafoResultado, cantidadDeNodos);
 
+        int n = cantidadDeNodos;
+        int m = (n*(n-1)/16)+1;
+
+        for (int i = 0; i < cantidadDeGrafosConexos; i++) {
+            boolean[][] grafo = grafoRandom(n, m);
+            ubicarGrafo(grafoResultado, grafo, i, cantidadDeNodosPorGrafo);
+        }
+        return grafoResultado;
+    }
+
+
+
+    public static void inicializarGrafo(boolean[][] grafo, int cantidadDeNodos) {
+        for (int i = 0; i < cantidadDeNodos; i++) {
+            for (int j = 0; j < cantidadDeNodos; j++) {
+                grafo[i][j] = false;
+            }
+            
+        }
+    }
+
+
+    public static void ubicarGrafo(boolean[][] grafoOriginal, boolean[][] grafoAUbicar, int numeroGrafo, int cantidadDeNodos) {
+        int desplazamiento = numeroGrafo*cantidadDeNodos;
+        for (int i = 0; i < cantidadDeNodos; i++) {
+            for (int j = 0; j < cantidadDeNodos; j++) {
+                grafoOriginal[desplazamiento + i][desplazamiento + j] = grafoAUbicar[i][j];
+            }
+            
+        }
+    }
+    
     public static void main(String[] args)
     {
         int n = 5;
@@ -277,8 +317,10 @@ public class funcionesAux
 
         boolean[][] grafo = grafoRandom(n, m);
 
-        printGrafo(grafo);      
-
+        printGrafo(grafo);
+        
+        boolean[][] grafo2 = crearGrafoDisconexo(5, 5);
+        printGrafo(grafo2);
     }
     
 
