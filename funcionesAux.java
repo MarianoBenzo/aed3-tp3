@@ -214,9 +214,9 @@ public class funcionesAux
             //int ruta = random.nextInt();
             //ruta = Math.abs(ruta % rutas.size());
 
-        	Random rnd = new Random();
-            rnd.setSeed(Calendar.getInstance().get(Calendar.SECOND)); //<-
-        	int ruta = (int) (Math.random()/*rnd.nextInt()*/ * rutas.size());
+//        	Random rnd = new Random();
+ //           rnd.setSeed(Calendar.getInstance().get(Calendar.SECOND));
+        	int ruta = (int) (Math.random()/*rnd.nextDouble()*/ * rutas.size());
 
             int x = rutas.get(ruta)%n;
             int y = rutas.get(ruta)/n;
@@ -312,7 +312,7 @@ public class funcionesAux
 
         printGrafo(grafo);
         
-        boolean[][] grafo2 = crearGrafoDisconexo(9, 3);
+        boolean[][] grafo2 = crearGrafoDisconexo(25, 5);
         printGrafo(grafo2);
     }
     
