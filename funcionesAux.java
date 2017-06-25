@@ -214,15 +214,11 @@ public class funcionesAux
             //int ruta = random.nextInt();
             //ruta = Math.abs(ruta % rutas.size());
 
-<<<<<<< HEAD
+
 //          Random rnd = new Random();
  //           rnd.setSeed(Calendar.getInstance().get(Calendar.SECOND));
             int ruta = (int) (Math.random()/*rnd.nextDouble()*/ * rutas.size());
-=======
-//        	Random rnd = new Random();
- //           rnd.setSeed(Calendar.getInstance().get(Calendar.SECOND));
-        	int ruta = (int) (Math.random()/*rnd.nextDouble()*/ * rutas.size());
->>>>>>> 8c0708368542f9b7c7ebd955564b20a199057650
+
 
             int x = rutas.get(ruta)%n;
             int y = rutas.get(ruta)/n;
@@ -278,7 +274,7 @@ public class funcionesAux
     }
 
     
-<<<<<<< HEAD
+
     public static boolean[][] crearGrafoDisconexo(int cantidadDeNodosPorGrafo, int cantidadDeGrafosConexos) {
         int cantidadDeNodos = cantidadDeNodosPorGrafo * cantidadDeGrafosConexos;
         boolean[][] grafoResultado = new boolean[cantidadDeNodos][cantidadDeNodos];
@@ -314,36 +310,7 @@ public class funcionesAux
             }
             
         }
-=======
-    public static boolean[][] crearGrafoDisconexo(int cantidadDeNodos, int cantidadDeGrafosConexos) {
-    	int cantidadDeNodosPorGrafo = cantidadDeNodos / cantidadDeGrafosConexos;
-    	boolean[][] grafoResultado = new boolean[cantidadDeNodos][cantidadDeNodos];
-    	inicializarGrafo(grafoResultado, cantidadDeNodos);
-    	for (int i = 0; i < cantidadDeGrafosConexos; i++) {
-    		boolean[][] grafo = grafoRandom(cantidadDeNodosPorGrafo, cantidadDeNodosPorGrafo);
-    		ubicarGrafo(grafoResultado, grafo, i, cantidadDeNodosPorGrafo);
-    	}
-    	return grafoResultado;
-    }
 
-    public static void inicializarGrafo(boolean[][] grafo, int cantidadDeNodos) {
-    	for (int i = 0; i < cantidadDeNodos; i++) {
-        	for (int j = 0; j < cantidadDeNodos; j++) {
-        		grafo[i][j] = false;
-        	}
-    		
-    	}
-    }
-
-    public static void ubicarGrafo(boolean[][] grafoOriginal, boolean[][] grafoAUbicar, int numeroGrafo, int cantidadDeNodos) {
-    	int desplazamiento = numeroGrafo*cantidadDeNodos;
-    	for (int i = 0; i < cantidadDeNodos; i++) {
-        	for (int j = 0; j < cantidadDeNodos; j++) {
-        		grafoOriginal[desplazamiento + i][desplazamiento + j] = grafoAUbicar[i][j];
-        	}
-    		
-    	}
->>>>>>> 8c0708368542f9b7c7ebd955564b20a199057650
     }
     
     public static void main(String[] args)
@@ -356,11 +323,9 @@ public class funcionesAux
 
         printGrafo(grafo);
         
-<<<<<<< HEAD
+
         boolean[][] grafo2 = crearGrafoDisconexo(5, 5);
-=======
-        boolean[][] grafo2 = crearGrafoDisconexo(25, 5);
->>>>>>> 8c0708368542f9b7c7ebd955564b20a199057650
+
         printGrafo(grafo2);
     }
     

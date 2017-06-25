@@ -3,44 +3,54 @@ import java.util.*;
 public class CMFgrasp
 {
 
-    public static int CMFgrasp(boolean[][] grafo, int n)
+    public static List<Integer> CMFgrasp(boolean[][] grafo, int n)
     {	
 
         int nodo = funcionesAux.nodoMayorGrado(grafo, n);
         //int nodo = (int) (Math.random() * n);
         
         int maxFrontera = 0;
+        List<Integer> maxClique = new ArrayList<Integer>();
 
         for(int j=0;j<(n/10)+1;j++)
         {
 
-            int frontera = CMFbusquedaLocal.CMFbusquedaLocalAux(grafo, n, nodo);
+            List<Integer> clique = CMFbusquedaLocal.CMFbusquedaLocalAux(grafo, n, nodo);
+            int frontera = funcionesAux.frontera(grafo, n, clique);
 
             if(maxFrontera < frontera)
             {
                 maxFrontera = frontera;
+                maxClique = clique;
             }
             
             nodo = (int) (Math.random() * n);
 
         }
 
-        return maxFrontera;
+        return maxClique;
     }
 
 
     public static void main(String[] args)
     {
-        int n = 50;
-        
-        int m = (n*(n-1)/2)-1;
+    	Scanner s = new Scanner(System.in);
 
-        boolean[][] grafo = funcionesAux.grafoRandom(n, m);
+        int n = s.nextInt();
+        int m = s.nextInt();
 
-        System.out.println("CMF Goloso: "+CMFgoloso.CMFgoloso(grafo, n));
-        System.out.println("CMF Busqueda Local: "+CMFbusquedaLocal.CMFbusquedaLocal(grafo, n));
-        System.out.println("CMF Grasp: "+CMFgrasp(grafo, n));
-        //System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
+        boolean[][] grafo = leerGrafoEntrada(n, m);
+
+
+        List<Integer> clique = CMFgrasp(grafo, n);
+        int sizeClique = clique.size();
+        int frontera = funcionesAux.frontera(grafo, n, clique);
+
+        System.out.print(frontera+" "+sizeClique+" ");
+        for(int nodo : clique)
+        {
+        	System.out.print(nodo+" ");
+        }
     }
 
 }

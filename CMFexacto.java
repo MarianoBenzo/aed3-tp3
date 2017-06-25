@@ -3,7 +3,7 @@ import java.util.*;
 public class CMFexacto
 {
 
-    public static int CMFexacto(boolean[][] grafo, int n)
+    public static List<Integer> CMFexacto(boolean[][] grafo, int n)
     {	
 
     	List<Integer> nodos = new ArrayList<Integer>();
@@ -14,27 +14,43 @@ public class CMFexacto
 
 		List<List<Integer>> cliques = funcionesAux.dameCliques(grafo, nodos);
 
-		List<Integer> fronteras = new ArrayList<Integer>();
+		int fronteraMax = 0;
+		List<Integer> cliqueMax = new ArrayList<Integer>();
     	
-    	for(int i=0;i<cliques.size();i++)
-        {
-        	fronteras.add(funcionesAux.frontera(grafo, n, cliques.get(i)));
+    	for(List<Integer> clique : cliques)
+        {	
+        	int frontera = funcionesAux.frontera(grafo, n, clique);
+        	if(fronteraMax < frontera)
+        	{
+        		fronteraMax = frontera;
+        		cliqueMax = clique;
+
+        	}
+        	
         }
 
-		return Collections.max(fronteras);
+		return cliqueMax;
     }
 
 
     public static void main(String[] args)
-    {
-        int n = 100;
-        
-        int m = n*(n-1)/4;
+    {	
+    	Scanner s = new Scanner(System.in);
 
-        boolean[][] grafo = funcionesAux.grafoRandom(n, m);
+        int n = s.nextInt();
+        int m = s.nextInt();
 
+        boolean[][] grafo = EntradaSalida.leerGrafoEntrada(n, m);
 
-        System.out.println("CMF Exacto: "+CMFexacto(grafo, n));
+        List<Integer> clique = CMFexacto(grafo, n);
+        int sizeClique = clique.size();
+        int frontera = funcionesAux.frontera(grafo, n, clique);
+
+        System.out.print(frontera+" "+sizeClique+" ");
+        for(int nodo : clique)
+        {
+        	System.out.print(nodo+" ");
+        }
 
     }
 

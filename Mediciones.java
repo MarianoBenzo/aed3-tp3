@@ -153,11 +153,11 @@ public class Mediciones {
 			//boolean[][] grafo = funcionesAux.crearGrafoDisconexo(n, m);//por subgrafo, n = nodos por subgrafo, m = cantidad de subgrafos, cantidad de aristas por subgrafo = n*(n-1)/16
 
 
-			int exacto = CMFexacto.CMFexacto(grafo, n);
+			int exacto = funcionesAux.frontera(grafo, n, CMFexacto.CMFexacto(grafo, n));
 			
-			int prueba = CMFgoloso.CMFgoloso(grafo, n);
-			//int prueba = CMFbusquedaLocal.CMFbusquedaLocal(grafo, n);
-			//int prueba = CMFgrasp.CMFgrasp(grafo, n);		
+			int prueba = funcionesAux.frontera(grafo, n, CMFgoloso.CMFgoloso(grafo, n));
+			//int prueba = funcionesAux.frontera(grafo, n, CMFbusquedaLocal.CMFbusquedaLocal(grafo, n));
+			//int prueba = funcionesAux.frontera(grafo, n, CMFgrasp.CMFgrasp(grafo, n));		
 
 			if(exacto == prueba)
 			{

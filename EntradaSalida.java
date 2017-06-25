@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.*;
 
 public class EntradaSalida {
 	
@@ -29,7 +30,7 @@ public class EntradaSalida {
 
 
 
-public static void escribirAciertos(List<Float> tiempos, String nombreArchivo) {
+	public static void escribirAciertos(List<Float> tiempos, String nombreArchivo) {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
@@ -38,7 +39,7 @@ public static void escribirAciertos(List<Float> tiempos, String nombreArchivo) {
             
             for (Float tiempo : tiempos) {
                 pw.println(tiempo); 
-      }
+     		}
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -51,4 +52,32 @@ public static void escribirAciertos(List<Float> tiempos, String nombreArchivo) {
         }
     }
     
+
+	public static boolean[][] leerGrafoEntrada(int n, int m) {
+		Scanner s = new Scanner(System.in);
+
+		boolean[][] grafoEntrada = new boolean[n][n];
+
+		for (boolean[] fila : grafoEntrada)
+	    {
+	        Arrays.fill(fila, false);
+	    }
+
+	    for(int i=0;i<m;i++)
+		{   
+
+			int x = s.nextInt();
+			int y = s.nextInt();
+
+			grafoEntrada[x][y] = true;
+			grafoEntrada[y][x] = true;
+
+		}
+
+		return grafoEntrada;
+
+    }
+
+
+
 }

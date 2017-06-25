@@ -42,7 +42,7 @@ public class CMFgoloso
     }
 
 
-    public static int CMFgoloso(boolean[][] grafo, int n)
+    public static List<Integer> CMFgoloso(boolean[][] grafo, int n)
     {	
 
         int nodoInicial = funcionesAux.nodoMayorGrado(grafo, n);
@@ -55,20 +55,29 @@ public class CMFgoloso
 
         List<Integer> cliqueMaxFrontera = CMFgolosoAux(grafo, n, clique, adyacentes); //Complejidad n^2
 
-        return funcionesAux.frontera(grafo, n, cliqueMaxFrontera);
+        return cliqueMaxFrontera;
     }
 
 
     public static void main(String[] args)
     {
-        int n = 200;
-        
-        int m = n*(n-1)/8;
+    	Scanner s = new Scanner(System.in);
 
-        boolean[][] grafo = funcionesAux.grafoRandom(n, m);
+        int n = s.nextInt();
+        int m = s.nextInt();
 
-        System.out.println("CMF Goloso: "+CMFgoloso(grafo, n));
-        System.out.println("CMF Exacto: "+CMFexacto.CMFexacto(grafo, n));
+        boolean[][] grafo = leerGrafoEntrada(n, m);
+
+
+        List<Integer> clique = CMFgoloso(grafo, n);
+        int sizeClique = clique.size();
+        int frontera = funcionesAux.frontera(grafo, n, clique);
+
+        System.out.print(frontera+" "+sizeClique+" ");
+        for(int nodo : clique)
+        {
+        	System.out.print(nodo+" ");
+        }
     }
 
 }
