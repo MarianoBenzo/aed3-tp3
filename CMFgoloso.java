@@ -66,7 +66,7 @@ public class CMFgoloso
         int n = s.nextInt();
         int m = s.nextInt();
 
-        boolean[][] grafo = leerGrafoEntrada(n, m);
+        boolean[][] grafo = EntradaSalida.leerGrafoEntrada(n, m);
 
 
         List<Integer> clique = CMFgoloso(grafo, n);
