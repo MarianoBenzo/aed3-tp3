@@ -34,14 +34,7 @@ public class Mediciones {
 		
     }
 
-/*
-	public static void escribirMedicionesGrafosCompletos(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
-		List<boolean[][]> grafos = funcionesAux.getGrafosAleatorios(cantidadDeGrafos);
-        List<Long> mediciones = getMediciones(grafos, cantidadMedicionesXInstancia);
-        EntradaSalida.escribirTiempos(mediciones, nombreArchivo);
-	}
 
-*/
 
 	public static void escribirMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
 
@@ -99,15 +92,12 @@ public class Mediciones {
 
 
 
-
-
 	public static void escribirMedicionesAciertos(int cantidadDeGrafos, int cantidadMedicionesXInstancia, String nombreArchivo) {
 
         List<Float> mediciones = getAciertos(cantidadDeGrafos, cantidadMedicionesXInstancia);
         EntradaSalida.escribirAciertos(mediciones, nombreArchivo);
 
 	}
-
 
 
 
@@ -138,7 +128,6 @@ public class Mediciones {
 		}
 		return mediciones;
 	}	
-
 
 
 

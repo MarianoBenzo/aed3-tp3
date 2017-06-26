@@ -4,6 +4,13 @@ import numpy as np
 import math
 from scipy import stats
 
+#para la parte de graficos
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+import pylab
+
+
 def leerDesdeArchivo(nombreArchivo):
     res = []
     archivo = open(nombreArchivo, "r") 
@@ -30,13 +37,7 @@ def leerDesdeArchivoAciertos(nombreArchivo):
     return res 
 
 
-#para la parte de graficos
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
-import pylab
-tiempos = leerDesdeArchivo('Complejidad grasp.txt')
-#print tiempos
+
 
 def graficarCorrelacion(nombreArchivo):
 	
@@ -209,27 +210,11 @@ def graficarAciertosSubgrafos():
 
 
 
-complejidad = []
-nodos = range(0, len(tiempos))
-for n in nodos:
-    complejidad.append(float((2**n)*(n**2)))
-
-complejidad2 = []
-nodos = range(0, len(tiempos))
-for n in nodos:
-    complejidad2.append(float((n**5)))
-
-
-
-#graficarTiempos(tiempos, 'Complejidad grasp.png')
-#graficarTiempos(complejidad2, 'complejidad.png')
-#graficarCorrelacion(nodos, tiempos, complejidad, 'pearsonTiempos.png')
 
 
 
 
 graficarCorrelacion('pearson busquedaLocal.png')
-
 #graficarComplejidades()
 #graficarComplejidadesAristas()
 #graficarAciertosNodos()
