@@ -7,39 +7,57 @@ import generadorGrafos.*;
 import mediciones.Medicion;
 import mediciones.MedicionAciertos;
 import mediciones.MedicionAciertosInstanciasSolNoOptima;
+import mediciones.MedicionDeCrecimientoEnCliquesDistancia;
+import mediciones.MedicionDistancias;
 import mediciones.MedicionTiempos;
 
 public class Mediciones {
 
-	public static void main(String[] args)
-    {
-		
-    	
-		// Instanciamos los distintos algoritmos		
-		Algoritmo exacto = new CMFexacto();
-		Algoritmo goloso = new CMFgoloso();
-		Algoritmo busquedaLocal = new CMFbusquedaLocal();
-		Algoritmo grasp = new CMFgrasp();
-		
-		// Instanciamos los distintos generadores de grafos
-		GeneradorGrafo aleatorio = new GrafoAleatorio();
-		GeneradorGrafo disconexo = new GrafoDisconexo();
-		GeneradorGrafo cliqueMaximaFronteraYNEstrellasDeGradoMaximo = new GrafoConCliqueMaximaFronteraYNEstrellasDeGradoMaximo();
-		
-		// Instanciamos las distintas mediciones
-		MedicionTiempos medicionTiempos = new MedicionTiempos();
-		MedicionAciertos medicionAciertos = new MedicionAciertos();
-		MedicionAciertosInstanciasSolNoOptima medicionAciertosInstanciasSolNoOptima = new MedicionAciertosInstanciasSolNoOptima();
+	// Instanciamos los distintos algoritmos		
+	static Algoritmo exacto = new CMFexacto();
+	static Algoritmo goloso = new CMFgoloso();
+	static Algoritmo busquedaLocal = new CMFbusquedaLocal();
+	static Algoritmo grasp = new CMFgrasp();
 
+	// Instanciamos los distintos generadores de grafos
+	static GeneradorGrafo aleatorio = new GrafoAleatorio();
+	static GeneradorGrafo disconexo = new GrafoDisconexo();
+	static GeneradorGrafo cliqueMaximaFronteraYNEstrellasDeGradoMaximo = new GrafoConCliqueMaximaFronteraYNEstrellasDeGradoMaximo();
+	static GeneradorGrafo cliqueCuyosNodosTienenFrontera2 = new GrafoConCliquesCuyosNodosTienenFrontera2();
+
+	// Instanciamos las distintas mediciones
+	static MedicionTiempos medicionTiempos = new MedicionTiempos();
+	static MedicionAciertos medicionAciertos = new MedicionAciertos();
+	static MedicionAciertosInstanciasSolNoOptima medicionAciertosInstanciasSolNoOptima = new MedicionAciertosInstanciasSolNoOptima();
+	static MedicionDistancias medicionDistancias = new MedicionDistancias();
+	static MedicionDeCrecimientoEnCliquesDistancia medicionDeCrecimientoEnCliquesDistancia = new MedicionDeCrecimientoEnCliquesDistancia();
+	
+	public static void main(String[] args)
+	{
+
+//		escribirMediciones(100, 100, aleatorio, goloso, medicionDistancias);
+//		escribirMediciones(100, 100, aleatorio, busquedaLocal, medicionDistancias);
+//		escribirMediciones(100, 100, aleatorio, grasp, medicionDistancias);
+//		escribirMediciones(50, 100, cliqueMaximaFronteraYNEstrellasDeGradoMaximo, goloso, medicionDistancias);
+//		escribirMediciones(50, 100, cliqueMaximaFronteraYNEstrellasDeGradoMaximo, busquedaLocal, medicionDistancias);
+//		escribirMediciones(50, 100, cliqueMaximaFronteraYNEstrellasDeGradoMaximo, grasp, medicionDistancias);
+		
+		
+		goloso.setIncio(Inicio.NODO_MAYOR_GRADO);		
+		busquedaLocal.setIncio(Inicio.NODO_MAYOR_GRADO);
+		grasp.setIncio(Inicio.NODO_MAYOR_GRADO);
+		medicionGrafoDeCrecimientoEnCliquesDistancia(17, 1);
+		
+	//	funcionesAux.printGrafo(cliqueCuyosNodosTienenFrontera2.generar(4, 0));
 		
 		// ademas a cada algoritmo con el metodo setInicio le seteamos el parametro de incio las dos opciones son las siguientes:
 		grasp.setIncio(Inicio.NODO_ALEATORIO);		
 		grasp.setIncio(Inicio.NODO_MAYOR_GRADO);
 
 		// y despues podemos llamar a la escritura de las mediciones con las instancias que queramos asi:
-		escribirMediciones(600, 100, aleatorio, goloso, medicionTiempos);
-		escribirMediciones(600, 100, aleatorio, busquedaLocal, medicionTiempos);
-		escribirMediciones(600, 100, aleatorio, grasp, medicionTiempos);
+		//escribirMediciones(600, 100, aleatorio, goloso, medicionTiempos);
+		//escribirMediciones(600, 100, aleatorio, busquedaLocal, medicionTiempos);
+		//escribirMediciones(600, 100, aleatorio, grasp, medicionTiempos);
 
 		
 //		GrafoConCliqueMaximaFronteraYNEstrellasDeGradoMaximo problematico = new GrafoConCliqueMaximaFronteraYNEstrellasDeGradoMaximo();
@@ -96,11 +114,26 @@ public class Mediciones {
 		
     }
 
+/**
+ * Impresiones para pruebas de generacion de grafos.
+  		boolean[][] grafoCliqueCuyosNodosTienenFrontera2 = cliqueCuyosNodosTienenFrontera2.generar(3, 0);	
+		funcionesAux.printGrafo(grafoCliqueCuyosNodosTienenFrontera2);
 
+ */
+
+	
+	public static void medicionGrafoDeCrecimientoEnCliquesDistancia(int cantidadMediciones, int repeticiones) {
+		escribirMediciones(cantidadMediciones, repeticiones, cliqueCuyosNodosTienenFrontera2, exacto, medicionDeCrecimientoEnCliquesDistancia);
+		escribirMediciones(cantidadMediciones, repeticiones, cliqueCuyosNodosTienenFrontera2, goloso, medicionDeCrecimientoEnCliquesDistancia);
+		escribirMediciones(cantidadMediciones, repeticiones, cliqueCuyosNodosTienenFrontera2, busquedaLocal, medicionDeCrecimientoEnCliquesDistancia);
+		escribirMediciones(cantidadMediciones, repeticiones, cliqueCuyosNodosTienenFrontera2, grasp, medicionDeCrecimientoEnCliquesDistancia);		
+	}
+	
+	
+	
 
 	public static void escribirMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia, GeneradorGrafo generador, 
 			Algoritmo algoritmo, Medicion medicion) {
-
         List<Object> mediciones = medicion.getMediciones(cantidadDeGrafos, cantidadMedicionesXInstancia, generador, algoritmo);
         
         String nombreArchivo = medicion.getNombre() + algoritmo.getNombre() + generador.getNombre() + ".txt";
