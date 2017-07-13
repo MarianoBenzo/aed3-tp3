@@ -7,10 +7,9 @@ import algoritmos.Algoritmo;
 import algoritmos.CMFexacto;
 import generadorGrafos.GeneradorGrafo;
 
-public class MedicionAciertos implements Medicion {
-
+public class MedicionDistancias implements Medicion {
 	public String getNombre() {
-		return "Aciertos";
+		return "Distancias";
 	}
 
 	public List<Object> getMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia, GeneradorGrafo generador, Algoritmo algoritmo) {
@@ -29,7 +28,7 @@ public class MedicionAciertos implements Medicion {
 			
 			System.out.println(i);
 			
-			mediciones.add(promedioDeAciertos(n, m, cantidadMedicionesXInstancia, generador, algoritmo));
+			mediciones.add(promedioDeDistancias(n, m, cantidadMedicionesXInstancia, generador, algoritmo));
 			
 			n++;//por nodo
 			m = (n*(n-1)/32)+1;//por nodo
@@ -43,9 +42,9 @@ public class MedicionAciertos implements Medicion {
 
 
 
-	public static Float promedioDeAciertos(int n, int m, int cantidadDeMediciones, GeneradorGrafo generador, Algoritmo algoritmo) {
+	public static Float promedioDeDistancias(int n, int m, int cantidadDeMediciones, GeneradorGrafo generador, Algoritmo algoritmo) {
 		
-		Float aciertos = new Float(0);
+		Float distancia = new Float(0);
 		Float promedio = new Float(0);
 		
 		Algoritmo algoritmoExacto = new CMFexacto();
@@ -58,19 +57,12 @@ public class MedicionAciertos implements Medicion {
 			
 			int prueba = algoritmo.ejecutar(grafo);
 
-			if(exacto == prueba)
-			{
-				aciertos++;
-			}
+			distancia += (exacto - prueba);
 		}
 
-		promedio = aciertos * 100 / cantidadDeMediciones;
+		promedio = distancia / cantidadDeMediciones;
 
 		return promedio;
 	}
 
-
-
-
 }
-

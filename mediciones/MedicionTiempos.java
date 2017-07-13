@@ -42,7 +42,7 @@ public class MedicionTiempos implements Medicion {
 
 			long tiempoIncial = System.nanoTime();
 			
-			algoritmo.ejecutar(grafo, n);
+			algoritmo.ejecutar(grafo);
 			
 			long tiempoFinal = System.nanoTime();
 			
@@ -52,3 +52,4 @@ public class MedicionTiempos implements Medicion {
 	}
 
 }
+

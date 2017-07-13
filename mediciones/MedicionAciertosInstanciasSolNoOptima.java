@@ -42,9 +42,9 @@ public class MedicionAciertosInstanciasSolNoOptima implements Medicion {
 		for (int i = 0; i < cantidadDeMediciones; i++)
 		{
 
-			int exacto = algoritmoExacto.ejecutar(grafo, n);
+			int exacto = algoritmoExacto.ejecutar(grafo);
 			
-			int prueba = algoritmo.ejecutar(grafo, n);
+			int prueba = algoritmo.ejecutar(grafo);
 
 			if(exacto == prueba)
 			{
@@ -57,3 +57,4 @@ public class MedicionAciertosInstanciasSolNoOptima implements Medicion {
 		return promedio;
 	}
 }
+
