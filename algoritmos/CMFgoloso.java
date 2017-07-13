@@ -54,10 +54,10 @@ public class CMFgoloso implements Algoritmo
     }
 
 
-    public int ejecutar(boolean[][] grafo, int n)
+    public int ejecutar(boolean[][] grafo)
     {	
 
-    	
+    	int n = grafo.length;
         int nodoInicial = funcionesAux.getNodoIncial(grafo, n, inicio);
         
         List<Integer> clique = new ArrayList<Integer>();
@@ -69,6 +69,11 @@ public class CMFgoloso implements Algoritmo
 
         return funcionesAux.frontera(grafo, n, cliqueMaxFrontera);
     }
+
+
+	public void setCondicionDeCorteEnIteraciones(CondicionDeCorteEnIteraciones condicionDeCorteEnIteraciones) {
+		
+	}
 
 /*
     public static void main(String[] args)

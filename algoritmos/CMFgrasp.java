@@ -14,9 +14,9 @@ public class CMFgrasp implements Algoritmo
 	}
 
 	
-    public int ejecutar(boolean[][] grafo, int n)
+    public int ejecutar(boolean[][] grafo)
     {	
-
+    	int n = grafo.length;
         int nodo = funcionesAux.getNodoIncial(grafo, n, inicio);
         CMFbusquedaLocal busquedaLocal = new CMFbusquedaLocal();
         int maxFrontera = 0;
@@ -38,6 +38,9 @@ public class CMFgrasp implements Algoritmo
         return maxFrontera;
     }
 
+	public void setCondicionDeCorteEnIteraciones(CondicionDeCorteEnIteraciones condicionDeCorteEnIteraciones) {
+		
+	}
     
     
 /*

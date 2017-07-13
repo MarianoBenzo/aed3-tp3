@@ -7,14 +7,17 @@ public class funcionesAux
     //frontera = Devuelve #frontera de la clique ingresada.
     public static int frontera(boolean[][] grafo, int n, List<Integer> clique)
     {
-        int res = 0;
-
+        //int res = 0;
+        Set<Integer> res = new HashSet<Integer>();
         for(int i=0;i<clique.size();i++)
         {
-            res = res + nodosAdyacentes(grafo, n, clique.get(i)).size() - (clique.size() - 1);
+            //res = res + 
+            res.addAll((Collection<Integer>)nodosAdyacentes(grafo, n, clique.get(i)));//.size() - (clique.size() - 1);
         }
-
-        return res;
+        int resultado = res.size();
+        if (clique.size() != 1)
+        	resultado = resultado - clique.size();
+        return resultado;
     }
 
 
@@ -163,7 +166,7 @@ public class funcionesAux
         System.out.println("Grafo: ");
         for(int i=0;i<n;i++)
         {
-            System.out.println(Arrays.toString(grafo[i]).replaceAll("true", "1").replaceAll("false", "0"));
+            System.out.println(i + Arrays.toString(grafo[i]).replaceAll("true", "*").replaceAll("false", " "));
         }
         System.out.println(" ");
     }
