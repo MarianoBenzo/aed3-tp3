@@ -24,7 +24,7 @@ public class MedicionDistancias implements Medicion {
 		//int n = 50;//por subgrafo
 		//int m = 1;//por subgrafo
 
-		for (int i = 0; i < cantidadDeGrafos; i++) {
+		for (int i = 1; i <= cantidadDeGrafos; i++) {
 			
 			System.out.println(i);
 			
@@ -49,7 +49,7 @@ public class MedicionDistancias implements Medicion {
 		
 		Algoritmo algoritmoExacto = new CMFexacto();
 		
-		for (int i = 0; i < cantidadDeMediciones; i++)
+		for (int i = 1; i <= cantidadDeMediciones; i++)
 		{
 			boolean[][] grafo = generador.generar(n, m);
 

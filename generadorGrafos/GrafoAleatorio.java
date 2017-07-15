@@ -5,6 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GrafoAleatorio implements GeneradorGrafo {
+
+	private int maximaFrontera = 0;
+
+	public int getMaximaFrontera() {
+		return maximaFrontera;
+	}
+
+	
 	public String getNombre() {
 		return "Aleatorio";
 	}

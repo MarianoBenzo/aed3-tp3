@@ -41,11 +41,11 @@ public class GeneradorComponentes {
     	}
     }
 
-    public static void copiarGrafoEnPosicion(int n, boolean[][] grafo, boolean[][] grafoEstrella, int tamanoGrafoEstrella) {
+    public static void copiarGrafoEnPosicion(int n, boolean[][] grafo, boolean[][] grafo2, int tamanoGrafo2) {
     //	int desplazamiento = n*tamanoGrafoEstrella;
-    	for (int i=0; i<tamanoGrafoEstrella; i++) {
-        	for (int j=0; j<tamanoGrafoEstrella; j++) {
-        		grafo[i+n][j+n] = grafoEstrella[i][j];
+    	for (int i=0; i<tamanoGrafo2; i++) {
+        	for (int j=0; j<tamanoGrafo2; j++) {
+        		grafo[i+n][j+n] = grafo2[i][j];
         	}
     	}
     }
@@ -59,5 +59,25 @@ public class GeneradorComponentes {
         	}
     	}
     }
+
+	public static int calcularMaximaFronteraParaClique(int cantidadNodosEnClique, int cantidadNodosExternosALaCliqueRelacionadosConCadaNodo) {
+		int maximaFrontera = 0;
+		
+		for (int i = 0; i < cantidadNodosEnClique; i++) {
+			int aux = (cantidadNodosEnClique - i)*(i+ cantidadNodosExternosALaCliqueRelacionadosConCadaNodo);
+			if (aux > maximaFrontera)
+				maximaFrontera = aux;
+		}
+				
+		return maximaFrontera;
+	}
+
+	public int getSumatoria(int n) {
+		int sumatoria = 0;
+		for (int i = 0; i < n; i++) {
+			sumatoria += i;
+		}
+		return sumatoria;
+	}
 
 }

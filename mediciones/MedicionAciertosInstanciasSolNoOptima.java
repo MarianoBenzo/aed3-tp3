@@ -6,7 +6,7 @@ import java.util.List;
 import algoritmos.Algoritmo;
 import algoritmos.CMFexacto;
 import generadorGrafos.GeneradorGrafo;
-import generadorGrafos.GrafoConCliqueMaximaFronteraYNEstrellasDeGradoMaximo;
+import generadorGrafos.GrafoConCMFYNEstrellasDeGradoMaximo;
 
 public class MedicionAciertosInstanciasSolNoOptima implements Medicion {
 
@@ -33,7 +33,7 @@ public class MedicionAciertosInstanciasSolNoOptima implements Medicion {
 		
 		Algoritmo algoritmoExacto = new CMFexacto();
 		
-		boolean[][] grafo = ((GrafoConCliqueMaximaFronteraYNEstrellasDeGradoMaximo)generador).generar(cantidadDeGrafosEstrella, cantidadDeNodosPorGrafoEstrella, cantidadGrafosEstrellaNodoMayorGrado);
+		boolean[][] grafo = ((GrafoConCMFYNEstrellasDeGradoMaximo)generador).generar(cantidadDeGrafosEstrella, cantidadDeNodosPorGrafoEstrella/*, cantidadGrafosEstrellaNodoMayorGrado*/);
 		int cantidadNodosClique = cantidadDeGrafosEstrella*cantidadDeNodosPorGrafoEstrella;;
     	int cantidadNodosDeGrafoNodoDeGradoMaximo = cantidadDeGrafosEstrella-1+1+cantidadDeNodosPorGrafoEstrella-1;
 		
@@ -57,4 +57,3 @@ public class MedicionAciertosInstanciasSolNoOptima implements Medicion {
 		return promedio;
 	}
 }
-

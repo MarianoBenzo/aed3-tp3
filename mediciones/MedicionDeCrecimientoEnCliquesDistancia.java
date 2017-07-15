@@ -32,17 +32,17 @@ public class MedicionDeCrecimientoEnCliquesDistancia implements Medicion {
 		Float distancia = new Float(0);
 		Float promedio = new Float(0);
 		
-		//Algoritmo algoritmoExacto = new CMFexacto();
+//		Algoritmo algoritmoExacto = new CMFexacto();
 		
 		for (int i = 0; i < cantidadDeMediciones; i++)
 		{
 			boolean[][] grafo = generador.generar(n, m);
 
-			//int exacto = algoritmoExacto.ejecutar(grafo, n);
+//			int exacto = algoritmoExacto.ejecutar(grafo);
 			
 			int prueba = algoritmo.ejecutar(grafo);
 
-			distancia += ((n*2) - prueba);
+			distancia += generador.getMaximaFrontera() - prueba;//exacto;//(exacto - prueba);
 		}
 
 		promedio = distancia / cantidadDeMediciones;

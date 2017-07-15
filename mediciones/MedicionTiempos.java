@@ -52,4 +52,3 @@ public class MedicionTiempos implements Medicion {
 	}
 
 }
-

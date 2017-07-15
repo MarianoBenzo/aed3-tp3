@@ -1,6 +1,13 @@
 package generadorGrafos;
 
 public class GrafoDisconexo implements GeneradorGrafo {
+	private int maximaFrontera = 0;
+
+	public int getMaximaFrontera() {
+		return maximaFrontera;
+	}
+	
+	
 	public String getNombre() {
 		return "Disconexo";
 	}
