@@ -4,8 +4,9 @@ package algoritmos;
 public class CMFgrasp implements Algoritmo
 {
 	private static Inicio inicio = Inicio.NODO_MAYOR_GRADO;
+	private static CondicionDeCorte condicionDeCorte = CondicionDeCorte.CANTIDAD_DE_NODOS_DIVIDO_DIEZ;
 
-	public void setIncio(Inicio inicio) {
+	public void setInicio(Inicio inicio) {
 		this.inicio = inicio;
 	}
 		
@@ -17,29 +18,81 @@ public class CMFgrasp implements Algoritmo
     public int ejecutar(boolean[][] grafo)
     {	
     	int n = grafo.length;
-        int nodo = funcionesAux.getNodoIncial(grafo, n, inicio);
+        int nodoInicial = funcionesAux.getNodoIncial(grafo, n, inicio);
         CMFbusquedaLocal busquedaLocal = new CMFbusquedaLocal();
+        ((Algoritmo)busquedaLocal).setInicio(inicio);
+
+        int maxFrontera = getMaxFrontera(grafo, n, nodoInicial, condicionDeCorte, busquedaLocal); 
+
+        return maxFrontera;
+    }
+
+    public static int getMaxFrontera(boolean[][] grafo, int n, int nodoInicial, 
+    		CondicionDeCorte condicionDeCorte, CMFbusquedaLocal busquedaLocal) {
+    	int maxFrontera = 0;
+    	switch (condicionDeCorte) {
+    		case CANTIDAD_DE_NODOS_DIVIDO_DIEZ:
+    	        maxFrontera = ejecutarVerificandoCantidadDeNodosDividoDiez(grafo, n, nodoInicial, busquedaLocal);
+   		case CINCO_VECES_SIN_MEJORAR:
+   				maxFrontera = ejecutarVerificandoCincoVecesSinMejorar(grafo, n, nodoInicial, busquedaLocal);
+    	}
+    	return maxFrontera;
+    }
+
+    
+    private static int ejecutarVerificandoCantidadDeNodosDividoDiez(boolean[][] grafo, int n, 
+    		int nodoInicial, CMFbusquedaLocal busquedaLocal) {
         int maxFrontera = 0;
 
-        for(int j=0;j<n/10;j++)
+        int repeticiones = n/10;
+        
+        if (repeticiones < 1)
+        	repeticiones = 1;
+        
+        for(int j=0;j<repeticiones;j++)
         {
 
-            int frontera =  busquedaLocal.CMFbusquedaLocalAux(grafo, n, nodo);
+            int frontera =  busquedaLocal.CMFbusquedaLocalAux(grafo, n, nodoInicial);
 
             if(maxFrontera < frontera)
             {
                 maxFrontera = frontera;
             }
             
-            nodo = (int) (Math.random() * n);
+            nodoInicial = (int) (Math.random() * n);
 
         }
-
         return maxFrontera;
+
+    }
+    
+    private static int ejecutarVerificandoCincoVecesSinMejorar(boolean[][] grafo, int n, 
+    		int nodoInicial, CMFbusquedaLocal busquedaLocal) {
+        int maxFrontera = 0;
+
+        int cantidadDeVecesSinMejorar = 0;
+        
+        
+        while (cantidadDeVecesSinMejorar < 5) 
+        {
+
+            int frontera =  busquedaLocal.CMFbusquedaLocalAux(grafo, n, nodoInicial);
+
+            if(maxFrontera < frontera)
+            {
+                maxFrontera = frontera;
+            } else {
+            	cantidadDeVecesSinMejorar++;
+            }
+            
+            nodoInicial = (int) (Math.random() * n);
+
+        }
+        return maxFrontera;
+
     }
 
-	public void setCondicionDeCorteEnIteraciones(CondicionDeCorteEnIteraciones condicionDeCorteEnIteraciones) {
-		
+    public void setCondicionDeCorteEnIteraciones(CondicionDeCorte condicionDeCorteEnIteraciones) {
 	}
     
     

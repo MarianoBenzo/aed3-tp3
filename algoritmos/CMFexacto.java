@@ -5,7 +5,7 @@ public class CMFexacto implements Algoritmo {
 
 	private static Inicio inicio = Inicio.NODO_MAYOR_GRADO;
 
-	public void setIncio(Inicio inicio) {
+	public void setInicio(Inicio inicio) {
 		this.inicio = inicio;
 	}
 
@@ -14,10 +14,10 @@ public class CMFexacto implements Algoritmo {
 	}
 
 
-    public int ejecutar(boolean[][] grafo, int n)
+    public int ejecutar(boolean[][] grafo)
     {	
-
     	List<Integer> nodos = new ArrayList<Integer>();
+    	int n = grafo.length;
     	for(int i=0;i<n;i++)
         {
         	nodos.add(i);
@@ -34,6 +34,11 @@ public class CMFexacto implements Algoritmo {
 
 		return Collections.max(fronteras);
     }
+
+	
+	public void setCondicionDeCorteEnIteraciones(CondicionDeCorte condicionDeCorteEnIteraciones) {
+		
+	}
 
 
 

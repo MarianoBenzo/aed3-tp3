@@ -133,7 +133,7 @@ public class funcionesAux
     public static int nodoMayorGrado(boolean[][] grafo, int n)
     {   
         int mayorGrado = 0;
-        Integer nodoMayorGrado = null;
+        Integer nodoMayorGrado = 0;
 
         for(int nodo=0;nodo<n;nodo++)
         {

@@ -5,7 +5,7 @@ public class CMFgoloso implements Algoritmo
 {
 	private static Inicio inicio = Inicio.NODO_MAYOR_GRADO;
 
-	public void setIncio(Inicio inicio) {
+	public void setInicio(Inicio inicio) {
 		this.inicio = inicio;
 	}
 
@@ -71,7 +71,7 @@ public class CMFgoloso implements Algoritmo
     }
 
 
-	public void setCondicionDeCorteEnIteraciones(CondicionDeCorteEnIteraciones condicionDeCorteEnIteraciones) {
+	public void setCondicionDeCorteEnIteraciones(CondicionDeCorte condicionDeCorteEnIteraciones) {
 		
 	}
 
