@@ -13,6 +13,7 @@ import mediciones.MedicionDeCrecimientoEnCliquesDistancia;
 import mediciones.MedicionDistancias;
 import mediciones.MedicionDistanciasCrecimientoEnCantidadDeEstrellas;
 import mediciones.MedicionTiempos;
+import mediciones.MedicionTiemposIncrementando1;
 
 public class Mediciones {
 
@@ -39,6 +40,9 @@ public class Mediciones {
 	static Medicion medicionAciertosIncrementandoAristas = new MedicionAciertosIncrementandoAristas();
 	static Medicion medicionAciertosIncrementandoNodos = new MedicionAciertosIncrementandoNodos();
 	static Medicion medicionDistanciasIncrementandoCMFYEstrellas = new MedicionDistanciasCrecimientoEnCantidadDeEstrellas(); 
+	static Medicion medicionTiemposIncrementando1 = new MedicionTiemposIncrementando1(); 
+
+	
 	public static void main(String[] args)
 	{
 
@@ -133,10 +137,10 @@ public class Mediciones {
 	public static void medicionDistanciaIncrementandoLasEstrellasYeLTamanoDeLaCMF(int cantidadMediciones, int repeticiones) {
 //		System.out.println("exacto:");
 //		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, exacto, medicionDistanciasIncrementandoCMFYEstrellas);
-		System.out.println("goloso:");
-		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, goloso, medicionDistanciasIncrementandoCMFYEstrellas);
-		System.out.println("busqueda local:");
-		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, busquedaLocal, medicionDistanciasIncrementandoCMFYEstrellas);
+//		System.out.println("goloso:");
+//		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, goloso, medicionDistanciasIncrementandoCMFYEstrellas);
+//		System.out.println("busqueda local:");
+//		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, busquedaLocal, medicionDistanciasIncrementandoCMFYEstrellas);
 		System.out.println("grasp:");
 		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, grasp, medicionDistanciasIncrementandoCMFYEstrellas);		
 		System.out.println("fin");
@@ -187,6 +191,26 @@ public class Mediciones {
 		System.out.println("fin");
 	}
 	
+	/**
+	 * 
+	 * @param cantidadMediciones
+	 * @param repeticiones
+	 * 
+	 * Tipo de Medicion: distancia a la solucion optima
+	 * 
+	 * La medicion n va a medir sobre un grafo conexo con 1 CMF de tamano n y n estrellas de grado maximo.
+	 */
+	public static void medicionTiemposIncrementandoLasEstrellasYeLTamanoDeLaCMF(int cantidadMediciones, int repeticiones) {
+//		System.out.println("exacto:");
+//		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, exacto, medicionDistanciasIncrementandoCMFYEstrellas);
+//		System.out.println("goloso:");
+//		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, goloso, medicionTiemposIncrementando1/*medicionDistanciasIncrementandoCMFYEstrellas*/);
+//		System.out.println("busqueda local:");
+//		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, busquedaLocal, medicionTiemposIncrementando1/*medicionDistanciasIncrementandoCMFYEstrellas*/);
+		System.out.println("grasp:");
+		escribirMediciones(cantidadMediciones, repeticiones, CMFYNEstrellasDeGradoMaximo, grasp, medicionTiemposIncrementando1/*medicionDistanciasIncrementandoCMFYEstrellas*/);		
+		System.out.println("fin");
+	}	
 	
 	/**
 	 * 
@@ -201,10 +225,10 @@ public class Mediciones {
 	public static void medicionDistanciaIncrementandoLasCliques(int cantidadMediciones, int repeticiones) {
 //		System.out.println("exacto:");
 //		escribirMediciones(cantidadMediciones, repeticiones, cliques0aN, exacto, medicionDeCrecimientoEnCliquesDistancia);
-//		System.out.println("goloso:");
-//		escribirMediciones(cantidadMediciones, repeticiones, cliques0aN, goloso, medicionDeCrecimientoEnCliquesDistancia);
-//		System.out.println("busqueda local:");
-//		escribirMediciones(cantidadMediciones, repeticiones, cliques0aN, busquedaLocal, medicionDeCrecimientoEnCliquesDistancia);
+		System.out.println("goloso:");
+		escribirMediciones(cantidadMediciones, repeticiones, cliques0aN, goloso, medicionDeCrecimientoEnCliquesDistancia);
+		System.out.println("busqueda local:");
+		escribirMediciones(cantidadMediciones, repeticiones, cliques0aN, busquedaLocal, medicionDeCrecimientoEnCliquesDistancia);
 		System.out.println("grasp:");
 		escribirMediciones(cantidadMediciones, repeticiones, cliques0aN, grasp, medicionDeCrecimientoEnCliquesDistancia);		
 		System.out.println("fin");
