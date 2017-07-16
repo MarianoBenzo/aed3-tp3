@@ -16,17 +16,18 @@ public class Main {
 		//Mediciones.medicionDistanciaIncrementandoElTamanoClique(50, 1);
 		
 		
-		seteoParamsAleatorio();
 		//Mediciones.grasp.setCondicionDeCorteEnIteraciones(CondicionDeCorte.CINCO_VECES_SIN_MEJORAR);
 //		Mediciones.medicionDistanciaIncrementandoLasCliques(50, 10);
 
+		seteoParamsAleatorio();
+		medicionesGraspParametroCorte(50, 10);
 		
 		
 		//Mediciones.medicionTiemposIncrementandoLasEstrellasYeLTamanoDeLaCMF(50, 10);
 		//Mediciones.medicionDistanciaIncrementandoLasCliquesYeLTamanoDeLasMismasEnganchadasUnNodoEnComun(50, 1);
 		//Mediciones.medicionGrafoInstanciasSolNoOptima(50,100);
 
-		Mediciones.medicionDistanciaIncrementandoLasEstrellasYeLTamanoDeLaCMF(50, 10);
+		//Mediciones.medicionDistanciaIncrementandoLasEstrellasYeLTamanoDeLaCMF(50, 10);
 	
 		
 		//	funcionesAux.printGrafo(Mediciones.cliques0aNEnganchadasConUnNodoEnComun.generar(6, 0));
