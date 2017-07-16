@@ -19,9 +19,10 @@ public class Main {
 		//Mediciones.grasp.setCondicionDeCorteEnIteraciones(CondicionDeCorte.CINCO_VECES_SIN_MEJORAR);
 //		Mediciones.medicionDistanciaIncrementandoLasCliques(50, 10);
 
-		seteoParamsAleatorio();
-		medicionesGraspParametroCorte(50, 10);
+//		seteoParamsAleatorio();
+//		medicionesGraspParametroCorte(35, 10);
 		
+		medicionPorDistanciaEnGrafosAleatorios(105, 10);
 		
 		//Mediciones.medicionTiemposIncrementandoLasEstrellasYeLTamanoDeLaCMF(50, 10);
 		//Mediciones.medicionDistanciaIncrementandoLasCliquesYeLTamanoDeLasMismasEnganchadasUnNodoEnComun(50, 1);
@@ -42,6 +43,16 @@ public class Main {
 
 	}
 
+	static public void medicionPorDistanciaEnGrafosAleatorios(int cantidadMediciones, int repeticiones) {
+		
+		Mediciones.escribirMediciones(cantidadMediciones, repeticiones, Mediciones.aleatorio, Mediciones.goloso, Mediciones.medicionDistancias);		
+		Mediciones.escribirMediciones(cantidadMediciones, repeticiones, Mediciones.aleatorio, Mediciones.busquedaLocal, Mediciones.medicionDistancias);		
+		Mediciones.escribirMediciones(cantidadMediciones, repeticiones, Mediciones.aleatorio, Mediciones.grasp, Mediciones.medicionDistancias);		
+		
+	}
+	
+	
+	
 	static public void medicionesGraspParametroCorte(int cantidadMediciones, int repeticiones) {
 		Mediciones.grasp.setCondicionDeCorteEnIteraciones(CondicionDeCorte.CINCO_VECES_SIN_MEJORAR);
 		Mediciones.escribirMediciones(cantidadMediciones, repeticiones, Mediciones.cliques0aN, Mediciones.grasp, Mediciones.medicionDeCrecimientoEnCliquesDistancia);		

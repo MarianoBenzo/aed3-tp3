@@ -15,11 +15,11 @@ public class MedicionDistancias implements Medicion {
 	public List<Object> getMediciones(int cantidadDeGrafos, int cantidadMedicionesXInstancia, GeneradorGrafo generador, Algoritmo algoritmo) {
 		List<Object> mediciones = new ArrayList<Object>();
 
-		int n = 2;//por nodo
-		int m = (n*(n-1)/32)+1;//por nodo
+		//int n = 2;//por nodo
+		//int m = (n*(n-1)/32)+1;//por nodo
 		
-		//int n = 15;//por arista
-		//int m = 1;//por arista
+		int n = 15;//por arista
+		int m = 1;//por arista
 		
 		//int n = 50;//por subgrafo
 		//int m = 1;//por subgrafo
@@ -30,10 +30,10 @@ public class MedicionDistancias implements Medicion {
 			
 			mediciones.add(promedioDeDistancias(n, m, cantidadMedicionesXInstancia, generador, algoritmo));
 			
-			n++;//por nodo
-			m = (n*(n-1)/32)+1;//por nodo
+			//n++;//por nodo
+			//m = (n*(n-1)/32)+1;//por nodo
 
-			//m++;//por arista
+			m++;//por arista
 
 			//m++;//por subgrafo
 		}
