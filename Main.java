@@ -20,7 +20,7 @@ public class Main {
 //		Mediciones.medicionDistanciaIncrementandoLasCliques(50, 10);
 
 		seteoParamsAleatorio();
-		medicionesGraspParametroCorte(35, 10);
+		medicionesGraspParametroCorte(50, 10);
 		
 		
 		//Mediciones.medicionTiemposIncrementandoLasEstrellasYeLTamanoDeLaCMF(50, 10);
